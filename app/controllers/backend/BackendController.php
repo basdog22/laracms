@@ -6,7 +6,14 @@ class BackendController extends BaseController {
 
 	public function showMainpage()
 	{
-		$this->layout->content = View::make('backend/backend');
+        if (Auth::check()){
+            $this->layout->sidebar = View::make('backend/sidebar');
+            $this->layout->navbar = View::make('backend/navbar');
+            $this->layout->content = View::make('backend/backend');
+        }else{
+            return Redirect::to('users/login');
+        }
+
 	}
 
 }

@@ -12,5 +12,5 @@
 */
 
 Route::get('/backend/','BackendController@showMainpage');
-
+Route::controller('users', 'UsersController');
 Route::get('/', 'FrontendController@showMainpage');
