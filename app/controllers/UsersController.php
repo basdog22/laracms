@@ -30,7 +30,7 @@ class UsersController extends BaseController {
             return Redirect::intended('/backend/');
         } else {
             return Redirect::to('users/login')
-                ->with('message', 'Your username/password combination was incorrect')
+                ->with('message', Lang::get('messages.wrong_pass'))
                 ->withInput();
         }
     }
