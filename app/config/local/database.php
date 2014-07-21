@@ -25,7 +25,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'lara',
 			'username'  => 'root',
-			'password'  => 'tinsun789',
+			'password'  => '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => 'lara_',
