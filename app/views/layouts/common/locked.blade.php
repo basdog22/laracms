@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Signin Template for Bootstrap</title>
+    <title>LaraCMS Authorization</title>
     {{ HTML::style('layouts/backend/plugins/bootstrap/bootstrap.css') }}
    <style>
        body {
@@ -57,11 +57,11 @@
 </head>
 
 <body>
-<div class="label label-danger">@if(Session::has('message'))
-    {{ Session::get('message') }}
-    @endif</div>
-<div class="container">
 
+<div class="container">
+    @if(Session::has('message'))<div class="alert alert-danger" role="alert">
+        {{ Session::get('message') }}
+        </div>@endif
     {{$content}}
 
 </div> <!-- /container -->
