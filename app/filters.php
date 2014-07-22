@@ -18,14 +18,18 @@ App::before(function($request)
 	foreach($addons as $addon){
 		if($addon->installed==1){
 			$addonsInstalled[] = $addon->addon_name;
-			require __DIR__."/../".Config::get('cms.public_dir')."/addons/{$addon->addon_name}/routes.php";
+            if(file_exists(__DIR__."/../".Config::get('cms.public_dir')."/addons/{$addon->addon_name}/routes.php")){
+			    require __DIR__."/../".Config::get('cms.public_dir')."/addons/{$addon->addon_name}/routes.php";
+            }
 		}else{
 			$addonsNotInstalled[] = $addon->addon_name;
 		}
 
 	}
+	Config::set("cms.addons.data",$addons);
 	Config::set("cms.addons.installed",$addonsInstalled);
 	Config::set("cms.addons.not_installed",$addonsNotInstalled);
+
 
 });
 

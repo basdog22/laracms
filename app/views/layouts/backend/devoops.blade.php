@@ -22,52 +22,29 @@
 	<![endif]-->
 </head>
 <body>
-<!--Start Header-->
-<div id="screensaver">
-	<canvas id="canvas"></canvas>
-	<i class="fa fa-lock" id="screen_unlock"></i>
-</div>
-<div id="modalbox">
-	<div class="devoops-modal">
-		<div class="devoops-modal-header">
-			<div class="modal-header-name">
-				<span>Basic table</span>
-			</div>
-			<div class="box-icons">
-				<a class="close-link">
-					<i class="fa fa-times"></i>
-				</a>
-			</div>
-		</div>
-		<div class="devoops-modal-inner">
-		</div>
-		<div class="devoops-modal-bottom">
-		</div>
-	</div>
-</div>
 {{ $navbar }}
 <!--End Header-->
 <!--Start Container-->
 <div id="main" class="container-fluid">
 	<div class="row">
-        <div id="sidebar-left" class="col-xs-2 col-sm-2">
-            <ul class="nav main-menu">
-                <li>
-                    <a href="{{ url('backend/') }}" class="active ajax-link">
-                        <i class="fa fa-dashboard"></i>
-                        <span class="hidden-xs">{{ Lang::get('strings.dashboard') }}</span>
-                    </a>
-                </li>
-            {{ $sidebar }}
-            {{$sidebarmenu}}
-            </ul>
-        </div>
+
+         {{ $sidebar }}
+
 		<!--Start Content-->
 		<div id="content" class="col-xs-12 col-sm-10">
-			{{ $content }}
+            {{ $content }}
 		</div>
 		<!--End Content-->
 	</div>
+</div>
+<div class="modal fade" id="laraModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <!-- content dynamically inserted -->
+            </div>
+        </div>
+    </div>
 </div>
 {{ HTML::script('layouts/backend/plugins/jquery/jquery-2.1.0.min.js') }}
 {{ HTML::script('layouts/backend/plugins/jquery-ui/jquery-ui.min.js') }}
@@ -75,5 +52,6 @@
 {{ HTML::script('layouts/backend/plugins/justified-gallery/jquery.justifiedgallery.min.js') }}
 {{ HTML::script('layouts/backend/plugins/tinymce/tinymce.min.js') }}
 {{ HTML::script('layouts/backend/plugins/tinymce/jquery.tinymce.min.js') }}
+{{ HTML::script('layouts/backend/lara.js') }}
 </body>
 </html>

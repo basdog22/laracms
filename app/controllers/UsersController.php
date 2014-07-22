@@ -16,6 +16,7 @@ class UsersController extends BaseController {
     */
 
     protected $layout = 'layouts.common.locked';
+    protected $area = 'common';
 
     public function getLogin(){
         $this->layout->content = View::make('backend/login');
@@ -27,7 +28,7 @@ class UsersController extends BaseController {
     }
     public function postSignin() {
         if (Auth::attempt(array('email'=>Input::get('email'), 'password'=>Input::get('pass')),true)) {
-            return Redirect::intended('/backend/');
+            return Redirect::intended('/backend/dashboard');
         } else {
             return Redirect::to('users/login')
                 ->with('message', Lang::get('messages.wrong_pass'))

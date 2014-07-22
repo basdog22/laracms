@@ -6,12 +6,10 @@ class BackendController extends BaseController {
     protected $area = 'backend';
 
 
-    public function showMainpage()
+    public function getDashboard()
 	{
         if (Auth::check()){
-            $this->layout->sidebar = View::make('backend/sidebar');
-            $this->layout->navbar = View::make('backend/navbar');
-            $this->layout->content = View::make('backend/backend');
+            $this->layout->content = View::make('backend/backend')->with('widgets',$this->layout->widgets);
         }else{
             return Redirect::to('users/login');
         }

@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/backend/','BackendController@showMainpage');
+Route::controller('backend','BackendController');
+Route::get('addons/manage','AddonsController@manage');
+Route::get('addons/uninstall/{addonid}','AddonsController@uninstall');
+Route::get('addons/install/{addonid}','AddonsController@install');
+Route::get('addons/new','AddonsController@newaddon');
+
+Route::controller("uploads",'UploadsController');
+
 Route::controller('users', 'UsersController');
 Route::get('/', 'FrontendController@showMainpage');

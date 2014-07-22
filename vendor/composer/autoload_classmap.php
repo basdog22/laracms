@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Addons' => $baseDir . '/app/models/Addons.php',
+    'AddonsController' => $baseDir . '/app/controllers/backend/AddonsController.php',
     'BackendController' => $baseDir . '/app/controllers/backend/BackendController.php',
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
     'Boris\\Boris' => $vendorDir . '/d11wtq/boris/lib/Boris/Boris.php',
@@ -954,6 +955,7 @@ return array(
     'Psr\\Log\\LoggerTrait' => $vendorDir . '/psr/log/Psr/Log/LoggerTrait.php',
     'Psr\\Log\\NullLogger' => $vendorDir . '/psr/log/Psr/Log/NullLogger.php',
     'SampleController' => $baseDir . '/public_html/addons/sample/controllers/SampleController.php',
+    'SamplesController' => $baseDir . '/public_html/addons/sample2/controllers/Sample2Controller.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
     'Stack\\Builder' => $vendorDir . '/stack/builder/src/Stack/Builder.php',
     'Stack\\StackedHttpKernel' => $vendorDir . '/stack/builder/src/Stack/StackedHttpKernel.php',
