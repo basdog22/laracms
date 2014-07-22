@@ -14,6 +14,6 @@ return array(
 	*/
 
 	'debug' => true,
-	'url' => 'http://localhost/laracms/',
+	'url' => 'http://www.laracms.net/',
 
 );

@@ -3,8 +3,10 @@
 class BackendController extends BaseController {
 
 	protected $layout = 'layouts.backend.devoops';
+    protected $area = 'backend';
 
-	public function showMainpage()
+
+    public function showMainpage()
 	{
         if (Auth::check()){
             $this->layout->sidebar = View::make('backend/sidebar');

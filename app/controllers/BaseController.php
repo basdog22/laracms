@@ -13,6 +13,16 @@ class BaseController extends Controller {
 		{
 			$this->layout = View::make($this->layout);
 		}
+        $addons = Config::get('cms.addons.installed');
+
+        foreach($addons as $k=>$v){
+            if($this->area=='backend'){
+                $this->layout->sidebarmenu .= View::make($v.'/extends/'.$this->area.'/sidebarmenu');
+            }else{
+
+            }
+
+        }
 	}
 
 }

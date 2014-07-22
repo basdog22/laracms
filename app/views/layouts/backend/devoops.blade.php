@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>LaraCMS</title>
+	<title>{{Config::get('cms.title')}}</title>
 	<meta name="description" content="description">
 	<meta name="author" content="DevOOPS">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -50,7 +50,18 @@
 <!--Start Container-->
 <div id="main" class="container-fluid">
 	<div class="row">
-		{{ $sidebar }}
+        <div id="sidebar-left" class="col-xs-2 col-sm-2">
+            <ul class="nav main-menu">
+                <li>
+                    <a href="{{ url('backend/') }}" class="active ajax-link">
+                        <i class="fa fa-dashboard"></i>
+                        <span class="hidden-xs">{{ Lang::get('strings.dashboard') }}</span>
+                    </a>
+                </li>
+            {{ $sidebar }}
+            {{$sidebarmenu}}
+            </ul>
+        </div>
 		<!--Start Content-->
 		<div id="content" class="col-xs-12 col-sm-10">
 			{{ $content }}
