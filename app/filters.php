@@ -13,8 +13,25 @@
 
 App::before(function($request)
 {
-	$addonsNotInstalled = $addonsInstalled = array();
+	$addonsNotInstalled = $addonsInstalled = $themesNotInstalled = $themesInstalled = array();
 	$addons = Addons::all();
+    $themes = Themes::all();
+    foreach($themes as $theme){
+        if($theme->installed==1){
+            $themesInstalled[] = $theme->theme_name;
+            if($theme->active==1){
+                Config::set('cms.theme',$theme->theme_name);
+            }
+        }else{
+            $themesNotInstalled[] = $theme->theme_name;
+        }
+
+    }
+
+    Config::set("cms.themes.data",$themes);
+    Config::set("cms.themes.installed",$themesInstalled);
+    Config::set("cms.themes.not_installed",$themesNotInstalled);
+
 	foreach($addons as $addon){
 		if($addon->installed==1){
 			$addonsInstalled[] = $addon->addon_name;
@@ -29,6 +46,8 @@ App::before(function($request)
 	Config::set("cms.addons.data",$addons);
 	Config::set("cms.addons.installed",$addonsInstalled);
 	Config::set("cms.addons.not_installed",$addonsNotInstalled);
+
+
 
 
 });
@@ -61,7 +80,9 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('login');
+			return Redirect::guest('users/login')->with(
+                'message',Lang::get('messages.login_required')
+            );
 		}
 	}
 });

@@ -5,4 +5,7 @@ return array(
     'addon_uninstalled' => 'Το πρόσθετο απεγκαταστάθηκε',
     'addon_installed' => 'Το πρόσθετο εγκαταστάθηκε',
     'no_access' => 'Δεν έχετε πρόσβαση',
+    'login_required'  =>  'Θα πρέπει να συνδεθείτε για να συνεχίσετε',
+    'menu_created'  =>  'Το menu δημιουργήθηκε',
+    'menu_deleted'  =>  'Το menu διαγράφηκε',
 );

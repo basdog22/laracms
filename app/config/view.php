@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'paths' => array(__DIR__.'/../views',__DIR__.'/../../public_html/addons'),
+	'paths' => array(__DIR__.'/../views',__DIR__.'/../../public_html/addons',__DIR__.'/../../public_html/layouts'),
 
 	/*
 	|--------------------------------------------------------------------------

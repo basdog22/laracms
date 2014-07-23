@@ -5,7 +5,7 @@
     $(document).ready(function () {
 
         // Load and run Uploader
-        LoadFineUploader(FileUploadAddons);
+        LoadFineUploader(FileUploadThemes);
     });
 </script>
 <!-- Fine Uploader DOM Element

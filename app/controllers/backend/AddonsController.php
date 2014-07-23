@@ -5,9 +5,7 @@ class AddonsController extends BaseController{
     protected $area = 'backend';
 
     function manage(){
-        if (!Auth::check()){
-            return Redirect::to('users/login');
-        }
+
         $addons = Config::get('cms.addons.data');
 
         $this->layout->content = View::make('backend/addons')->with('addons',$addons);

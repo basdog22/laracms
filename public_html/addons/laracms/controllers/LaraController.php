@@ -2,6 +2,9 @@
 
 class LaraController extends BaseController {
 
+    protected $area = 'frontend';
+
+    protected $layout = 'frontend.default.layout';
 	/*
 	|--------------------------------------------------------------------------
 	| Default Home Controller
@@ -17,7 +20,10 @@ class LaraController extends BaseController {
 
 	public function showMainpage()
 	{
-		return View::make('laracms/views/lara');
+
+		$this->layout->content = View::make('laracms/views/lara');
 	}
+
+
 
 }

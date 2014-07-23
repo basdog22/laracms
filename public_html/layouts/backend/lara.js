@@ -17,6 +17,16 @@ $(document).ready(function () {
     $('#laraModal').on('hidden.bs.modal', function () {
         $('#laraModal .modal-body').html('');
     });
+
+    $(document).on('click','.delbtn',function(e){
+
+        var a = window.confirm('Delete?');
+        if(a){
+            return true;
+        }
+        e.preventDefault();
+        return false;
+    });
 });
 
 function FileUploadAddons(){
@@ -34,6 +44,28 @@ function FileUploadAddons(){
         },
         request: {
             endpoint: '/uploads/handleaddons'
+        },
+        validation: {
+            allowedExtensions: ['zip']
+        }
+    });
+}
+
+function FileUploadThemes(){
+    $('#bootstrapped-fine-uploader').fineUploader({
+        template: 'qq-template-bootstrap',
+        classes: {
+            success: 'alert alert-success',
+            fail: 'alert alert-error'
+        },
+        thumbnails: {
+            placeholders: {
+                waitingPath: "assets/waiting-generic.png",
+                notAvailablePath: "assets/not_available-generic.png"
+            }
+        },
+        request: {
+            endpoint: '/uploads/handlethemes'
         },
         validation: {
             allowedExtensions: ['zip']

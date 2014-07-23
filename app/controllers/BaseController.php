@@ -12,7 +12,12 @@ class BaseController extends Controller {
 
 		if ( ! is_null($this->layout))
 		{
-			$this->layout = View::make($this->layout);
+            if($this->area == 'backend' || $this->area == 'common'){
+                $this->layout = View::make($this->layout);
+            }elseif($this->area == 'frontend'){
+                $this->layout = View::make('frontend.'.Config::get('cms.theme').'.layout');
+            }
+
 		}
 
 
@@ -41,7 +46,7 @@ class BaseController extends Controller {
                 $this->layout->navbar = View::make('backend/navbar')->with('navtools',$this->layout->navtools);
 
 
-            }else{
+            }elseif($this->area=='frontend'){
 
             }
 

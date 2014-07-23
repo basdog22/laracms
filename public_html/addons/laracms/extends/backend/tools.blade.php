@@ -1,6 +1,6 @@
 <li class="hidden-xs">
-    <a href="#" class="modal-link">
-        <i class="fa fa-cogs"></i>
-        I am a tool!
+    <a href="{{ url('backend/menus') }}" >
+        <i class="fa fa-th-list"></i>
+        {{ Lang::get('strings.menus') }}
     </a>
 </li>

@@ -6,13 +6,11 @@ class BackendController extends BaseController {
     protected $area = 'backend';
 
 
-    public function getDashboard()
+    public function dashboard()
 	{
-        if (Auth::check()){
-            $this->layout->content = View::make('backend/backend')->with('widgets',$this->layout->widgets);
-        }else{
-            return Redirect::to('users/login');
-        }
+
+        $this->layout->content = View::make('backend/backend')->with('widgets',$this->layout->widgets);
+
 
 	}
 
