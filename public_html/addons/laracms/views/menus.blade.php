@@ -24,6 +24,7 @@
                 <div class="no-move"></div>
             </div>
             <div class="box-content no-padding">
+                {{ $menus->links() }}
                 <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="addonstable">
                     <thead>
                     <tr>
@@ -61,6 +62,7 @@
                     </tr>
                     </tfoot>
                 </table>
+                {{ $menus->links() }}
             </div>
         </div>
     </div>

@@ -19,7 +19,7 @@ class LaraBackendController extends BaseController {
 
 
     public function menus(){
-        $menus = Menus::all();
+        $menus = Menus::paginate(20);
         $this->layout->content = View::make('laracms/views/menus')->with('menus',$menus);
     }
 

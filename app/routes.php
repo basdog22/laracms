@@ -13,6 +13,8 @@
 
 Route::group(array('before' => 'auth'), function()
 {
+    Route::get('backend/','BackendController@dashboard');
+    Route::get('backend/help','BackendController@help');
     Route::get('backend/dashboard','BackendController@dashboard');
     Route::get('addons/manage','AddonsController@manage');
     Route::get('addons/uninstall/{addonid}','AddonsController@uninstall');

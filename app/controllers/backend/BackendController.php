@@ -14,4 +14,12 @@ class BackendController extends BaseController {
 
 	}
 
+    public function help(){
+        if (Request::ajax()){
+            return View::make('backend/help');
+        }else{
+            $this->layout->content = View::make('backend/help');
+        }
+    }
+
 }

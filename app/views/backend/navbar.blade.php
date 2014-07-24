@@ -20,19 +20,19 @@
                         <ul class="nav navbar-nav pull-right panel-menu">
                             {{ $navtools }}
                             <li class="hidden-xs">
-                                <a href="{{ url('addons/manage') }}" >
+                                <a id="addonslink" href="{{ url('addons/manage') }}" >
                                     <i class="fa fa-cogs"></i>
                                     {{ Lang::get('strings.addons') }}
                                 </a>
                             </li>
                             <li class="hidden-xs">
-                                <a class="ajax-link" href="{{ url('themes/manage') }}">
+                                <a id="themeslink" class="ajax-link" href="{{ url('themes/manage') }}">
                                     <i class="fa fa-desktop"></i>
                                     {{ Lang::get('strings.themes') }}
                                 </a>
                             </li>
                             <li class="hidden-xs">
-                                <a href="{{ url('users/manage') }}" class="ajax-link">
+                                <a id="userslink" href="{{ url('users/manage') }}" class="ajax-link">
                                     <i class="fa fa-users"></i>
                                     {{ Lang::get('strings.users') }}
                                 </a>
@@ -83,6 +83,19 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li class="hidden-xs">
+                                <a href="/backend/help" class="modal-link" id="helpdialog">
+                                    <i class="fa fa-lightbulb-o"></i>
+
+                                </a>
+                            </li>
+                            <li class="hidden-xs">
+                                <a href="#" id="locked-screen">
+                                    <i class="fa fa-lock"></i>
+
+                                </a>
+                            </li>
+
                         </ul>
                     </div>
                 </div>

@@ -58,4 +58,5 @@ return array(
     'lastname'        =>  'Επώνυμο',
     'firstname'        =>  'Όνομα',
     'new_user'        =>  'Νέος χρήστης',
+    'add_user'        =>  'Προσθήκη χρήστη',
 );

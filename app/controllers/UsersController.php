@@ -43,7 +43,7 @@ class UsersController extends BaseController {
     }
 
     public function manage(){
-        $users = User::all();
+        $users = User::paginate(20);
 
         $this->userBackendLayout();
 
