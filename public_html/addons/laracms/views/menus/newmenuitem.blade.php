@@ -1,8 +1,8 @@
 
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
-            {{ Form::open(array('url'=>'backend/addmenu', 'class'=>'form-newmenu')) }}
-            <h2 class="form-signin-heading">{{ Lang::get('strings.new_menu') }}</h2>
+            {{ Form::open(array('url'=>'backend/addmenuitem', 'class'=>'form-newmenu')) }}
+            <h2 class="form-signin-heading">{{ Lang::get('strings.new_menuitem') }}</h2>
 
             {{ Form::label(Lang::get('strings.for_menu')) }}
             {{ Form::select('menuid', $menus) }}

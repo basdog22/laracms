@@ -45,5 +45,17 @@ return array(
     'link_attr'        =>  'Ιδιότητες',
     'link_css'        =>  'CSS',
     'link_class'        =>  'CSS Class',
-
+    'url'        =>  'Σύνδεσμος αντικειμένου',
+    'link_text'        =>  'Κείμενο αντικειμένου',
+    'edit'        =>  'Επεξεργασία',
+    'edit_menu'        =>  'Επεξεργασία Menu',
+    'save_menu'        =>  'Αποθήκευση Menu',
+    'edit_menuitem'        =>  'Επεξεργασία αντικειμένου Menu',
+    'save_menuitem'        =>  'Αποθήκευση αντικειμένου Menu',
+    'close'        =>  'Κλείσε',
+    'user_img'        =>  'Avatar',
+    'email'        =>  'Email',
+    'lastname'        =>  'Επώνυμο',
+    'firstname'        =>  'Όνομα',
+    'new_user'        =>  'Νέος χρήστης',
 );

@@ -25,9 +25,9 @@ class ThemesController extends BaseController{
             $theme->installed = 0;
             $theme->active = 0;
             $theme->save();
-            return Redirect::to('themes/manage')->withMessage(Lang::get('messages.theme_uninstalled'));
+            return Redirect::to('themes/manage')->withMessage($this->notifyView(Lang::get('messages.theme_uninstalled')));
         }else{
-            return Redirect::to('themes/manage')->withMessage(Lang::get('messages.no_access'));
+            return Redirect::to('themes/manage')->withMessage($this->notifyView(Lang::get('messages.no_access'),'error'));
         }
 
     }
@@ -37,9 +37,9 @@ class ThemesController extends BaseController{
             $theme = Themes::find($themeid);
             $theme->installed = 1;
             $theme->save();
-            return Redirect::to('themes/manage')->withMessage(Lang::get('messages.theme_installed'));
+            return Redirect::to('themes/manage')->withMessage($this->notifyView(Lang::get('messages.theme_installed')));
         }else{
-            return Redirect::to('themes/manage')->withMessage(Lang::get('messages.no_access'));
+            return Redirect::to('themes/manage')->withMessage($this->notifyView(Lang::get('messages.no_access'),'error'));
         }
 
     }
@@ -47,7 +47,7 @@ class ThemesController extends BaseController{
     function activate($themeid){
         $theme = Themes::find($themeid);
         if($theme->active){
-            return Redirect::to('themes/manage')->withMessage(Lang::get('messages.no_change'));
+            return Redirect::to('themes/manage')->withMessage($this->notifyView(Lang::get('messages.no_change'),'warning'));
         }else{
             $themes = Themes::all();
             foreach($themes as $atheme){
@@ -60,7 +60,7 @@ class ThemesController extends BaseController{
                 }
             }
         }
-        return Redirect::to('themes/manage')->withMessage(Lang::get('messages.theme_activated'));
+        return Redirect::to('themes/manage')->withMessage($this->notifyView(Lang::get('messages.theme_activated')));
     }
 
     function newtheme(){

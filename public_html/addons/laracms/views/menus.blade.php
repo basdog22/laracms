@@ -40,8 +40,11 @@
                         <td><a href="{{ url('backend/menuitems/'.$menu->id) }}">{{ $menu->menu_name }}</a></td>
                         <td>{{ $menu->menu_title }}</td>
                         <td>
-                            <a class="btn btn-default" href="{{ url('backend/menuitems/'.$menu->id) }}">{{ Lang::get('strings.menuitems') }}</a>
-                            <a class="btn btn-danger delbtn" href="{{ url('backend/delmenu/'.$menu->id) }}">{{ Lang::get('strings.delete') }}</a>
+                            <div class="btn-group">
+                                <a class="btn btn-default modal-link" href="{{ url('backend/editmenu/'.$menu->id) }}">{{ Lang::get('strings.edit') }}</a>
+                                <a class="btn btn-default" href="{{ url('backend/menuitems/'.$menu->id) }}">{{ Lang::get('strings.menuitems') }}</a>
+                                <a class="btn btn-danger delbtn" href="{{ url('backend/delmenu/'.$menu->id) }}">{{ Lang::get('strings.delete') }}</a>
+                            </div>
                         </td>
                     </tr>
                     @endforeach

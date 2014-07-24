@@ -16,9 +16,9 @@ class AddonsController extends BaseController{
             $addon = Addons::find($addonid);
             $addon->installed = 0;
             $addon->save();
-            return Redirect::to('addons/manage')->withMessage(Lang::get('messages.addon_uninstalled'));
+            return Redirect::to('addons/manage')->withMessage($this->notifyView(Lang::get('messages.addon_uninstalled')));
         }else{
-            return Redirect::to('addons/manage')->withMessage(Lang::get('messages.no_access'));
+            return Redirect::to('addons/manage')->withMessage($this->notifyView(Lang::get('messages.no_access'),'error'));
         }
 
     }
@@ -28,9 +28,9 @@ class AddonsController extends BaseController{
             $addon = Addons::find($addonid);
             $addon->installed = 1;
             $addon->save();
-            return Redirect::to('addons/manage')->withMessage(Lang::get('messages.addon_installed'));
+            return Redirect::to('addons/manage')->withMessage($this->notifyView(Lang::get('messages.addon_installed')));
         }else{
-            return Redirect::to('addons/manage')->withMessage(Lang::get('messages.no_access'));
+            return Redirect::to('addons/manage')->withMessage($this->notifyView(Lang::get('messages.no_access'),'error'));
         }
 
     }

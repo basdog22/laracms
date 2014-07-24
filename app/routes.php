@@ -24,6 +24,11 @@ Route::group(array('before' => 'auth'), function()
     Route::get('themes/install/{themeid}','ThemesController@install');
     Route::get('themes/activate/{themeid}','ThemesController@activate');
     Route::get('themes/new','ThemesController@newtheme');
+
+    Route::get('users/manage','UsersController@manage');
+    Route::get('users/new','UsersController@newuser');
+
+    Route::post('users/adduser','UsersController@adduser');
 });
 
 

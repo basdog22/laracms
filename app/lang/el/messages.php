@@ -8,4 +8,7 @@ return array(
     'login_required'  =>  'Θα πρέπει να συνδεθείτε για να συνεχίσετε',
     'menu_created'  =>  'Το menu δημιουργήθηκε',
     'menu_deleted'  =>  'Το menu διαγράφηκε',
+    'theme_activated'  =>  'Το θέμα ενεργοποιήθηκε',
+    'theme_uninstalled'  =>  'Το θέμα απεγκαταστάθηκε',
+    'theme_installed'  =>  'Το θέμα εγκαταστάθηκε',
 );

@@ -36,6 +36,38 @@ class UsersController extends BaseController {
         }
     }
 
+    public function userBackendLayout(){
+        $this->area = 'backend';
+        $this->layout = 'layouts.backend.devoops';
+        $this->setupLayout();
+    }
 
+    public function manage(){
+        $users = User::all();
+
+        $this->userBackendLayout();
+
+        $this->layout->content = View::make('backend/users')->with('users',$users);
+    }
+
+    public function newuser(){
+        $this->userBackendLayout();
+        if (Request::ajax()){
+            return View::make('backend/newuser');
+        }else{
+            $this->layout->content = View::make('backend/newuser');
+        }
+    }
+
+
+    public function adduser(){
+        $user = new User;
+        $user->firstname = Input::get('firstname');
+        $user->lastname = Input::get('lastname');
+        $user->email = Input::get('email');
+        $user->password = Hash::make(Input::get('password'));
+        $user->save();
+        return Redirect::to('users/manage/')->withMessage($this->notifyView(Lang::get('messages.user_created')));
+    }
 
 }

@@ -53,4 +53,8 @@ class BaseController extends Controller {
         }
 	}
 
+    public function notifyView($message,$type='success'){
+        return MessagesHelper::message_format($message,$type);
+    }
+
 }
