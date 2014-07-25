@@ -46,9 +46,12 @@
     <td>{{ $user->firstname }}</td>
     <td>
         @if ($user->id==1)
-        -
+        <a href="{{url('users/profile/')}}" class="btn btn-primary modal-link">{{Lang::get('strings.profile')}}</a>
         @else
-        oo
+        <div class="btn-group">
+        <a href="{{url('users/profile/'.$user->id)}}" class="btn btn-primary modal-link">{{Lang::get('strings.profile')}}</a>
+        <a href="{{url('users/edituser/'.$user->id)}}" class="btn btn-primary modal-link">{{Lang::get('strings.edit')}}</a>
+        </div>
         @endif
     </td>
 </tr>

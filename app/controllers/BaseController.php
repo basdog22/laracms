@@ -33,18 +33,25 @@ class BaseController extends Controller {
                     $this->layout->widgets .= View::make($v.'/extends/'.$this->area.'/widgets');
                 }
                 if(View::exists($v.'/extends/'.$this->area.'/tools')){
-
                     $this->layout->navtools .= View::make($v.'/extends/'.$this->area.'/tools');
-
+                }
+                if(View::exists($v.'/extends/'.$this->area.'/footer')){
+                    $this->layout->footeritems .= View::make($v.'/extends/'.$this->area.'/footer');
+                }
+                if(View::exists($v.'/extends/'.$this->area.'/header')){
+                    $this->layout->headeritems .= View::make($v.'/extends/'.$this->area.'/header');
                 }
                 //check if empty
                 $this->layout->sidebarmenu = ($this->layout->sidebarmenu)?$this->layout->sidebarmenu:'';
                 $this->layout->widgets = ($this->layout->widgets)?$this->layout->widgets:'';
                 $this->layout->navtools = ($this->layout->navtools)?$this->layout->navtools:'';
+                $this->layout->footeritems = ($this->layout->footeritems)?$this->layout->footeritems:'';
+                $this->layout->headeritems = ($this->layout->headeritems)?$this->layout->headeritems:'';
 
                 $this->layout->sidebar = View::make('backend/sidebar')->with('sidebarmenu',$this->layout->sidebarmenu);
                 $this->layout->navbar = View::make('backend/navbar')->with('navtools',$this->layout->navtools);
-
+                $this->layout->footer = View::make('backend/footer')->with('footeritems',$this->layout->footeritems);
+                $this->layout->header = View::make('backend/header')->with('headeritems',$this->layout->headeritems);
 
             }elseif($this->area=='frontend'){
 

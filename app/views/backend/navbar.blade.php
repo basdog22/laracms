@@ -51,30 +51,12 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="{{ url('users/profile/') }}">
+                                        <a class="modal-link" href="{{ url('users/profile/') }}">
                                             <i class="fa fa-user"></i>
                                             <span class="hidden-sm text">{{ Lang::get('strings.profile')}}</span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="{{ url('users/messages/') }}" class="ajax-link">
-                                            <i class="fa fa-envelope"></i>
-                                            <span class="hidden-sm text">{{ Lang::get('strings.messages') }}</span>
-                                        </a>
-                                    </li>
 
-                                    <li>
-                                        <a href="{{ url('backend/tasks/') }}" class="ajax-link">
-                                            <i class="fa fa-envelope"></i>
-                                            <span class="hidden-sm text">{{ Lang::get('strings.tasks') }}</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ url('users/settings/') }}" class="ajax-link">
-                                            <i class="fa fa-envelope"></i>
-                                            <span class="hidden-sm text">{{ Lang::get('strings.settings') }}</span>
-                                        </a>
-                                    </li>
                                     <li>
                                         <a href="/users/logout">
                                             <i class="fa fa-power-off"></i>

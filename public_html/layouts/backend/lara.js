@@ -99,6 +99,13 @@ $(document).ready(function () {
     });
     LoadSelect2Script(doSelects);
 
+    $('.main-menu li a').each(function(){
+        if($($(this))[0].href==String(window.location))
+            $(this).addClass('active-parent active')
+            $(this).parent().addClass('active');
+            $(this).parent().parent().parent().addClass('active');
+    });
+
     //assign hotkeys
     Mousetrap.bind(['command+l', 'ctrl+l'], function(e) {
         if($.cookie('locked')==1){

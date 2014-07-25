@@ -11,4 +11,5 @@ return array(
     'theme_activated'  =>  'Το θέμα ενεργοποιήθηκε',
     'theme_uninstalled'  =>  'Το θέμα απεγκαταστάθηκε',
     'theme_installed'  =>  'Το θέμα εγκαταστάθηκε',
+    'user_saved'        =>  'Ο χρήστης αποθηκεύτηκε',
 );

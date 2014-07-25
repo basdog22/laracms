@@ -59,6 +59,43 @@ class UsersController extends BaseController {
         }
     }
 
+    public function edituser($userid){
+        $user = User::find($userid);
+        $this->userBackendLayout();
+        if (Request::ajax()){
+            return View::make('backend/edituser')->with('user',$user);
+        }else{
+            $this->layout->content = View::make('backend/edituser')->with('user',$user);
+        }
+    }
+
+    public function saveuser(){
+        $user = User::find(Input::get('userid'));
+        $user->firstname = Input::get('firstname');
+        $user->lastname = Input::get('lastname');
+        $user->email = Input::get('email');
+        if(Input::get('password')){
+            $user->password = Hash::make(Input::get('password'));
+        }
+        $user->save();
+        return Redirect::to('users/manage/')->withMessage($this->notifyView(Lang::get('messages.user_saved')));
+
+    }
+
+    public function profile($userid=null){
+        $nocontact = false;
+        if(!$userid){
+            $userid = Auth::user()->id;
+            $nocontact = true;
+        }
+        $user = User::find($userid);
+        $this->userBackendLayout();
+        if (Request::ajax()){
+            return View::make('backend/profile')->with('user',$user)->with('nocontact',$nocontact);
+        }else{
+            $this->layout->content = View::make('backend/profile')->with('user',$user)->with('nocontact',$nocontact);
+        }
+    }
 
     public function adduser(){
         $user = new User;

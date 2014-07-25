@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<addon>
-	<name>sample</name>
-	<title>Sample Addon</title>
-	<image>http://laravel.com/assets/img/logo-head.png</image>
-	<version>2.2</version>
-	<author>Bill</author>
-	<url>http://www.google.com</url>
-</addon>

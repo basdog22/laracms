@@ -34,6 +34,7 @@ return array(
     'CreateAddonsTable' => $baseDir . '/app/database/migrations/2014_07_20_130249_create_addons_table.php',
     'CreateMenuitemsTable' => $baseDir . '/app/database/migrations/2014_07_23_134756_create_menuitems_table.php',
     'CreateMenusTable' => $baseDir . '/app/database/migrations/2014_07_23_130132_create_menus_table.php',
+    'CreateTablePages' => $baseDir . '/app/database/migrations/2014_07_25_093414_create_table_pages.php',
     'CreateThemesTable' => $baseDir . '/app/database/migrations/2014_07_23_113142_create_themes_table.php',
     'CreateUsersTable' => $baseDir . '/app/database/migrations/2014_07_20_130044_create_users_table.php',
     'Crypt_AES' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/AES.php',

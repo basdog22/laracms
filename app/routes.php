@@ -27,10 +27,13 @@ Route::group(array('before' => 'auth'), function()
     Route::get('themes/activate/{themeid}','ThemesController@activate');
     Route::get('themes/new','ThemesController@newtheme');
 
+    Route::get('users/profile/{userid?}','UsersController@profile');
     Route::get('users/manage','UsersController@manage');
     Route::get('users/new','UsersController@newuser');
+    Route::get('users/edituser/{userid}','UsersController@edituser');
 
     Route::post('users/adduser','UsersController@adduser');
+    Route::post('users/saveuser','UsersController@saveuser');
 });
 
 

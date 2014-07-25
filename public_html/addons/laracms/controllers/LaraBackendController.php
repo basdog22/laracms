@@ -20,7 +20,7 @@ class LaraBackendController extends BaseController {
 
     public function menus(){
         $menus = Menus::paginate(20);
-        $this->layout->content = View::make('laracms/views/menus')->with('menus',$menus);
+        $this->layout->content = View::make('laracms/views/menus/menus')->with('menus',$menus);
     }
 
     public function newmenu(){
@@ -121,6 +121,43 @@ class LaraBackendController extends BaseController {
         $menu = Menus::find($menuid);
         $menuitems = Menuitems::where('menuid','=',$menuid)->get();
         $this->layout->content = View::make('laracms/views/menus/menuitems')->with('menuitems',$menuitems)->with('menu',$menu);
+    }
+
+    public function pages(){
+        $pages = Pages::paginate(20);
+        $this->layout->content = View::make('laracms/views/pages/pages')->with('pages',$pages);
+    }
+
+
+    public function newpage(){
+        $pages = Pages::paginate(20);
+        $this->layout->content = View::make('laracms/views/pages/new')->with('pages',$pages);
+    }
+
+    public function editpage($pageid){
+        $pages = Pages::paginate(20);
+        $page = Pages::find($pageid);
+        $this->layout->content = View::make('laracms/views/pages/new')->with('pages',$pages)->with('page',$page);
+    }
+
+    public function savepage(){
+        if(Input::get('pageid')){
+            $page = Pages::find(Input::get('pageid'));
+        }else{
+            $page = new Pages;
+        }
+        $page->page_slug = Input::get('page_slug');
+        $page->title = Input::get('title');
+        $page->subtitle = Input::get('subtitle');
+        $page->content = Input::get('content');
+        $page->status = Input::get('status');
+        $page->save();
+
+        if(Input::get('saveclose')){
+            return Redirect::to('backend/pages/')->withMessage($this->notifyView(Lang::get('messages.page_saved')));
+        }else{
+            return Redirect::to('backend/editpage/'.$page->id)->withMessage($this->notifyView(Lang::get('messages.page_saved')));
+        }
     }
 
 }
