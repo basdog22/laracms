@@ -2,11 +2,11 @@
     <div id="breadcrumb" class="col-md-12">
         <ol class="breadcrumb">
             <li><a href="{{ url('backend/dashboard') }}">{{ Lang::get('strings.dashboard') }}</a></li>
-            <li><a href="{{ url('backend/pages') }}">{{ Lang::get('strings.pages') }}</a></li>
+            <li><a href="{{ url('backend/pages') }}">{{ Lang::get('laracms::strings.pages') }}</a></li>
             @if(isset($page))
             <li><a href="{{ url('backend/editpage/'.$page->id) }}">{{ Lang::get('strings.edit') }}</a></li>
             @else
-            <li><a href="{{ url('backend/newpage') }}">{{ Lang::get('strings.new_page') }}</a></li>
+            <li><a href="{{ url('backend/newpage') }}">{{ Lang::get('laracms::strings.new_page') }}</a></li>
             @endif
         </ol>
     </div>
@@ -25,7 +25,7 @@
     </div>
     <div class="col-md-10">
         {{ Form::open(array('url'=>'backend/savepage', 'class'=>'form-newpage')) }}
-        <h2 class="form-signin-heading">{{ Lang::get('strings.new_page') }}</h2>
+        <h2 class="form-signin-heading">{{ Lang::get('laracms::strings.new_page') }}</h2>
         @if(isset($page))
         {{ Form::hidden('pageid', $page->id) }}
         {{ Form::label(Lang::get('strings.slug')) }}

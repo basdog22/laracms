@@ -16,10 +16,14 @@ Route::group(array('prefix' => 'backend'), function()
     Route::get('delmenu/{menuid}','LaraBackendController@delmenu');
 
 
+    Route::get('settings', 'LaraBackendController@settings');
+
     Route::get('pages', 'LaraBackendController@pages');
     Route::get('newpage', 'LaraBackendController@newpage');
     Route::get('editpage/{pageid}', 'LaraBackendController@editpage');
 
+
+    Route::post('savesettings', 'LaraBackendController@savesettings');
 
     Route::post('savemenu', 'LaraBackendController@savemenu');
     Route::post('addmenu', 'LaraBackendController@addmenu');

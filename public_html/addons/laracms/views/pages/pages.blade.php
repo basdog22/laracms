@@ -2,7 +2,7 @@
     <div id="breadcrumb" class="col-md-12">
         <ol class="breadcrumb">
             <li><a href="{{ url('backend/dashboard') }}">{{ Lang::get('strings.dashboard') }}</a></li>
-            <li><a href="{{ url('backend/pages') }}">{{ Lang::get('strings.pages') }}</a></li>
+            <li><a href="{{ url('backend/pages') }}">{{ Lang::get('laracms::strings.pages') }}</a></li>
         </ol>
     </div>
 </div>
@@ -12,12 +12,12 @@
             <div class="box-header">
                 <div class="box-name">
                     <i class="fa fa-cogs"></i>
-                    <span>{{ Lang::get('strings.pages') }}</span>
+                    <span>{{ Lang::get('laracms::strings.pages') }}</span>
                 </div>
                 <div class="box-icons">
                     <a href="{{url('backend/newpage')}}" style="width: auto">
                         <i class="fa fa-plus"></i>
-                        {{ Lang::get('strings.new_page') }}
+                        {{ Lang::get('laracms::strings.new_page') }}
                     </a>
 
                 </div>
@@ -43,7 +43,7 @@
                         <td>{{ $page->id }}</td>
                         <td><a href="{{ url('backend/editpage/'.$page->id) }}">{{ $page->title }}</a></td>
                         <td>{{ $page->version }}</td>
-                        <td>{{ ($page->status)?Lang::get('strings.published'):Lang::get('strings.draft') }}</td>
+                        <td>{{ ($page->status)?Lang::get('laracms::strings.published'):Lang::get('laracms::strings.draft') }}</td>
                         <td>{{ $page->created_at }}</td>
                         <td>{{ $page->updated_at }}</td>
                         <td>

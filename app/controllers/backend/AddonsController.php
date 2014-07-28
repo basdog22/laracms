@@ -8,12 +8,16 @@ class AddonsController extends BaseController{
 
         $addons = Config::get('cms.addons.data');
 
+        Event::fire('backend.addons.manage', array($addons));
+
         $this->layout->content = View::make('backend/addons')->with('addons',$addons);
     }
 
     function uninstall($addonid){
         if($addonid>1){
+
             $addon = Addons::find($addonid);
+            Event::fire('backend.addons.uninstall', array($addon));
             $addon->installed = 0;
             $addon->save();
             return Redirect::to('addons/manage')->withMessage($this->notifyView(Lang::get('messages.addon_uninstalled')));
@@ -26,6 +30,7 @@ class AddonsController extends BaseController{
     function install($addonid){
         if($addonid>1){
             $addon = Addons::find($addonid);
+            Event::fire('backend.addons.install', array($addon));
             $addon->installed = 1;
             $addon->save();
             return Redirect::to('addons/manage')->withMessage($this->notifyView(Lang::get('messages.addon_installed')));

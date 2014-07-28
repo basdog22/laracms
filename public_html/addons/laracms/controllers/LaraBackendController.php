@@ -31,6 +31,23 @@ class LaraBackendController extends BaseController {
         }
     }
 
+    public function settings(){
+        $settings = Settings::whereRaw("section='laracms'")->get();
+
+        $this->layout->content = View::make('laracms/views/settings')->with('settings',$settings);
+    }
+
+    public function savesettings(){
+        if(Input::get('id')){
+            $settings = Settings::find(Input::get('id'));
+        }else{
+            $settings = new Settings;
+        }
+
+        $settings->setting_name = Input::get('setting_name');
+        $settings->setting_value = Input::get('setting_name');
+    }
+
     public function newmenuitem(){
         $menus = Menus::all();
         $sel = array();
@@ -49,7 +66,7 @@ class LaraBackendController extends BaseController {
         $menu->menu_name = Input::get('menu_name');
         $menu->menu_title = Input::get('menu_title');
         $menu->save();
-        return Redirect::to('backend/menus')->withMessage($this->notifyView(Lang::get('messages.menu_created'),'success'));
+        return Redirect::to('backend/menus')->withMessage($this->notifyView(Lang::get('laracms::messages.menu_created'),'success'));
     }
 
     public function addmenuitem(){
@@ -62,7 +79,7 @@ class LaraBackendController extends BaseController {
         $menu->link_css = Input::get('link_css');
         $menu->link_class = Input::get('link_class');
         $menu->save();
-        return Redirect::to('backend/menuitems/'.Input::get('menuid'))->withMessage($this->notifyView(Lang::get('messages.menuitem_created'),'success'));
+        return Redirect::to('backend/menuitems/'.Input::get('menuid'))->withMessage($this->notifyView(Lang::get('laracms::messages.menuitem_created'),'success'));
     }
 
     public function editmenuitem($menuitemid){
@@ -101,7 +118,7 @@ class LaraBackendController extends BaseController {
         $menu->menu_name = Input::get('menu_name');
         $menu->menu_title = Input::get('menu_title');
         $menu->save();
-        return Redirect::to('backend/menus')->withMessage($this->notifyView(Lang::get('messages.menu_saved'),'success'));
+        return Redirect::to('backend/menus')->withMessage($this->notifyView(Lang::get('laracms::messages.menu_saved'),'success'));
     }
 
     public function savemenuitem(){
@@ -114,7 +131,7 @@ class LaraBackendController extends BaseController {
         $menu->link_css = Input::get('link_css');
         $menu->link_class = Input::get('link_class');
         $menu->save();
-        return Redirect::to('backend/menuitems/'.Input::get('menuid'))->withMessage($this->notifyView(Lang::get('messages.menuitem_saved')));
+        return Redirect::to('backend/menuitems/'.Input::get('menuid'))->withMessage($this->notifyView(Lang::get('laracms::messages.menuitem_saved')));
     }
 
     public function menuitems($menuid){
@@ -124,7 +141,7 @@ class LaraBackendController extends BaseController {
     }
 
     public function pages(){
-        $pages = Pages::paginate(20);
+        $pages = Pages::paginate(Config::get('auto_settings.backend.laracms.paging'));
         $this->layout->content = View::make('laracms/views/pages/pages')->with('pages',$pages);
     }
 
@@ -154,9 +171,9 @@ class LaraBackendController extends BaseController {
         $page->save();
 
         if(Input::get('saveclose')){
-            return Redirect::to('backend/pages/')->withMessage($this->notifyView(Lang::get('messages.page_saved')));
+            return Redirect::to('backend/pages/')->withMessage($this->notifyView(Lang::get('laracms::messages.page_saved')));
         }else{
-            return Redirect::to('backend/editpage/'.$page->id)->withMessage($this->notifyView(Lang::get('messages.page_saved')));
+            return Redirect::to('backend/editpage/'.$page->id)->withMessage($this->notifyView(Lang::get('laracms::messages.page_saved')));
         }
     }
 

@@ -1,67 +1,102 @@
 <?php
 
-class BaseController extends Controller {
+class BaseController extends Controller
+{
 
-	/**
-	 * Setup the layout used by the controller.
-	 *
-	 * @return void
-	 */
-	protected function setupLayout()
-	{
+    /**
+     * Setup the layout used by the controller.
+     *
+     * @return void
+     */
 
-		if ( ! is_null($this->layout))
-		{
-            if($this->area == 'backend' || $this->area == 'common'){
+    protected $addonlinks;
+
+    protected function setupLayout()
+    {
+
+        if (!is_null($this->layout)) {
+            if ($this->area == 'backend' || $this->area == 'common') {
                 $this->layout = View::make($this->layout);
-            }elseif($this->area == 'frontend'){
-                $this->layout = View::make('frontend.'.Config::get('cms.theme').'.layout');
+            } elseif ($this->area == 'frontend') {
+                $this->layout = View::make('frontend.' . Config::get('cms.theme') . '.layout');
             }
 
-		}
+        }
 
 
         $addons = Config::get('cms.addons.installed');
 
-        foreach($addons as $k=>$v){
-            if($this->area=='backend'){
-
-                if(View::exists($v.'/extends/'.$this->area.'/sidebarmenu')){
-                    $this->layout->sidebarmenu .= View::make($v.'/extends/'.$this->area.'/sidebarmenu');
+        $this->addonlinks = View::make('laracms/extends/backend/addonlinks-dummy');
+        foreach ($addons as $k => $v) {
+            if ($this->area == 'backend') {
+                if (View::exists($v . '/extends/' . $this->area . '/addonlinks') && $v != 'laracms') {
+                    $this->addonlinks .= View::make($v . '/extends/' . $this->area . '/addonlinks');
                 }
-                if(View::exists($v.'/extends/'.$this->area.'/widgets')){
-                    $this->layout->widgets .= View::make($v.'/extends/'.$this->area.'/widgets');
-                }
-                if(View::exists($v.'/extends/'.$this->area.'/tools')){
-                    $this->layout->navtools .= View::make($v.'/extends/'.$this->area.'/tools');
-                }
-                if(View::exists($v.'/extends/'.$this->area.'/footer')){
-                    $this->layout->footeritems .= View::make($v.'/extends/'.$this->area.'/footer');
-                }
-                if(View::exists($v.'/extends/'.$this->area.'/header')){
-                    $this->layout->headeritems .= View::make($v.'/extends/'.$this->area.'/header');
-                }
-                //check if empty
-                $this->layout->sidebarmenu = ($this->layout->sidebarmenu)?$this->layout->sidebarmenu:'';
-                $this->layout->widgets = ($this->layout->widgets)?$this->layout->widgets:'';
-                $this->layout->navtools = ($this->layout->navtools)?$this->layout->navtools:'';
-                $this->layout->footeritems = ($this->layout->footeritems)?$this->layout->footeritems:'';
-                $this->layout->headeritems = ($this->layout->headeritems)?$this->layout->headeritems:'';
-
-                $this->layout->sidebar = View::make('backend/sidebar')->with('sidebarmenu',$this->layout->sidebarmenu);
-                $this->layout->navbar = View::make('backend/navbar')->with('navtools',$this->layout->navtools);
-                $this->layout->footer = View::make('backend/footer')->with('footeritems',$this->layout->footeritems);
-                $this->layout->header = View::make('backend/header')->with('headeritems',$this->layout->headeritems);
-
-            }elseif($this->area=='frontend'){
 
             }
+        }
+        if ($this->area == 'backend') {
+            Config::set('cms.addonlinks', $this->addonlinks);
+            $widgets = Event::fire('backend.widgets.create');
+
+            foreach ($widgets as $w) {
+                foreach ($w as $o) {
+                    $this->layout->widgets .= View::make($o);
+                }
+            }
+
+            $sidebarmenu = Event::fire('backend.sidebar.create');
+
+            foreach ($sidebarmenu as $w) {
+                foreach ($w as $o) {
+                    $this->layout->sidebarmenu .= View::make($o);
+                }
+            }
+
+            $navtools = Event::fire('backend.navbar.create');
+
+            foreach ($navtools as $w) {
+                foreach ($w as $o) {
+                    $this->layout->navtools .= View::make($o);
+                }
+            }
+            $footeritems = Event::fire('backend.footer.create');
+
+            foreach ($footeritems as $w) {
+                foreach ($w as $o) {
+                    $this->layout->footeritems .= View::make($o);
+                }
+            }
+
+            $headeritems = Event::fire('backend.header.create');
+
+            foreach ($headeritems as $w) {
+                foreach ($w as $o) {
+                    $this->layout->headeritems .= View::make($o);
+                }
+            }
+
+            //check if empty
+            $this->layout->sidebarmenu = ($this->layout->sidebarmenu) ? $this->layout->sidebarmenu : '';
+            $this->layout->widgets = ($this->layout->widgets) ? $this->layout->widgets : '';
+            $this->layout->navtools = ($this->layout->navtools) ? $this->layout->navtools : '';
+            $this->layout->footeritems = ($this->layout->footeritems) ? $this->layout->footeritems : '';
+            $this->layout->headeritems = ($this->layout->headeritems) ? $this->layout->headeritems : '';
+
+            $this->layout->sidebar = View::make('backend/sidebar')->with('sidebarmenu', $this->layout->sidebarmenu);
+            $this->layout->navbar = View::make('backend/navbar')->with('navtools', $this->layout->navtools);
+            $this->layout->footer = View::make('backend/footer')->with('footeritems', $this->layout->footeritems);
+            $this->layout->header = View::make('backend/header')->with('headeritems', $this->layout->headeritems);
+        } elseif ($this->area == 'frontend') {
 
         }
-	}
 
-    public function notifyView($message,$type='success'){
-        return MessagesHelper::message_format($message,$type);
+
+    }
+
+    public function notifyView($message, $type = 'success')
+    {
+        return MessagesHelper::message_format($message, $type);
     }
 
 }

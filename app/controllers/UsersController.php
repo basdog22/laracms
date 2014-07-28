@@ -23,7 +23,9 @@ class UsersController extends BaseController {
     }
 
     public function getLogout(){
+        Event::fire('users.user.before_logout', array(Auth::user()));
         Auth::logout();
+        Event::fire('users.user.after_logout');
         return Redirect::to('users/login')->with('message', 'Your are now logged out!');
     }
     public function postSignin() {
@@ -36,7 +38,7 @@ class UsersController extends BaseController {
         }
     }
 
-    public function userBackendLayout(){
+    public function useBackendLayout(){
         $this->area = 'backend';
         $this->layout = 'layouts.backend.devoops';
         $this->setupLayout();
@@ -44,14 +46,14 @@ class UsersController extends BaseController {
 
     public function manage(){
         $users = User::paginate(20);
-
-        $this->userBackendLayout();
+        Event::fire('backend.users.manage', array($users));
+        $this->useBackendLayout();
 
         $this->layout->content = View::make('backend/users')->with('users',$users);
     }
 
     public function newuser(){
-        $this->userBackendLayout();
+        $this->useBackendLayout();
         if (Request::ajax()){
             return View::make('backend/newuser');
         }else{
@@ -61,7 +63,8 @@ class UsersController extends BaseController {
 
     public function edituser($userid){
         $user = User::find($userid);
-        $this->userBackendLayout();
+        Event::fire('backend.users.edit', array($user));
+        $this->useBackendLayout();
         if (Request::ajax()){
             return View::make('backend/edituser')->with('user',$user);
         }else{
@@ -71,6 +74,7 @@ class UsersController extends BaseController {
 
     public function saveuser(){
         $user = User::find(Input::get('userid'));
+        Event::fire('backend.users.before_save', array($user));
         $user->firstname = Input::get('firstname');
         $user->lastname = Input::get('lastname');
         $user->email = Input::get('email');
@@ -78,6 +82,7 @@ class UsersController extends BaseController {
             $user->password = Hash::make(Input::get('password'));
         }
         $user->save();
+        Event::fire('backend.users.after_save', array($user));
         return Redirect::to('users/manage/')->withMessage($this->notifyView(Lang::get('messages.user_saved')));
 
     }
@@ -89,7 +94,8 @@ class UsersController extends BaseController {
             $nocontact = true;
         }
         $user = User::find($userid);
-        $this->userBackendLayout();
+        Event::fire('backend.users.profile', array($user));
+        $this->useBackendLayout();
         if (Request::ajax()){
             return View::make('backend/profile')->with('user',$user)->with('nocontact',$nocontact);
         }else{
@@ -103,6 +109,7 @@ class UsersController extends BaseController {
         $user->lastname = Input::get('lastname');
         $user->email = Input::get('email');
         $user->password = Hash::make(Input::get('password'));
+        Event::fire('backend.users.before_add', array($user));
         $user->save();
         return Redirect::to('users/manage/')->withMessage($this->notifyView(Lang::get('messages.user_created')));
     }

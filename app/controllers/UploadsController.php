@@ -450,7 +450,7 @@ class UploadsController extends BaseController
         $addon->author = $xml->author;
         $addon->url = $xml->url;
         $addon->installed = 0;
-
+        Event::fire('backend.addons.saveaddoninfo', array($addon));
         $addon->save();
     }
 
@@ -479,7 +479,7 @@ class UploadsController extends BaseController
         $theme->url = $xml->url;
         $theme->installed = 0;
         $theme->active = 0;
-
+        Event::fire('backend.themes.savethemeinfo', array($theme));
         $theme->save();
     }
 

@@ -11,51 +11,61 @@
 |
 */
 
-App::before(function($request)
-{
-	$addonsNotInstalled = $addonsInstalled = $themesNotInstalled = $themesInstalled = array();
-	$addons = Addons::all();
+App::before(function ($request) {
+    $addonsNotInstalled = $addonsInstalled = $themesNotInstalled = $themesInstalled = array();
+    $addons = Addons::all();
     $themes = Themes::all();
-    foreach($themes as $theme){
-        if($theme->installed==1){
+    foreach ($themes as $theme) {
+        if ($theme->installed == 1) {
             $themesInstalled[] = $theme->theme_name;
-            if($theme->active==1){
-                Config::set('cms.theme',$theme->theme_name);
+            if ($theme->active == 1) {
+                Config::set('cms.theme', $theme->theme_name);
             }
-        }else{
+        } else {
             $themesNotInstalled[] = $theme->theme_name;
         }
 
     }
 
-    Config::set("cms.themes.data",$themes);
-    Config::set("cms.themes.installed",$themesInstalled);
-    Config::set("cms.themes.not_installed",$themesNotInstalled);
+    $settings = Settings::whereRaw("autoload=1")->get();
+    $auto_settings = array();
+    foreach ($settings as $setting) {
+        $auto_settings[$setting->area][$setting->section][$setting->setting_name] = $setting->setting_value;
+    }
 
-	foreach($addons as $addon){
-		if($addon->installed==1){
-			$addonsInstalled[] = $addon->addon_name;
-            if(file_exists(__DIR__."/../".Config::get('cms.public_dir')."/addons/{$addon->addon_name}/routes.php")){
-			    require __DIR__."/../".Config::get('cms.public_dir')."/addons/{$addon->addon_name}/routes.php";
+    Config::set("cms.auto_settings", $auto_settings);
+    Config::set("cms.themes.data", $themes);
+    Config::set("cms.themes.installed", $themesInstalled);
+    Config::set("cms.themes.not_installed", $themesNotInstalled);
+
+    foreach ($addons as $addon) {
+        if ($addon->installed == 1) {
+            $addonsInstalled[] = $addon->addon_name;
+            if (file_exists(__DIR__ . "/../" . Config::get('cms.public_dir') . "/addons/{$addon->addon_name}/routes.php")) {
+                require __DIR__ . "/../" . Config::get('cms.public_dir') . "/addons/{$addon->addon_name}/routes.php";
             }
-		}else{
-			$addonsNotInstalled[] = $addon->addon_name;
-		}
+            if (file_exists(__DIR__ . "/../" . Config::get('cms.public_dir') . "/addons/{$addon->addon_name}/filters.php")) {
+                require __DIR__ . "/../" . Config::get('cms.public_dir') . "/addons/{$addon->addon_name}/filters.php";
+            }
+            $namespace = $addon->addon_name;
+            $path = public_path() . "/addons/{$addon->addon_name}/lang";
+            Lang::addNamespace($namespace, $path);
 
-	}
-	Config::set("cms.addons.data",$addons);
-	Config::set("cms.addons.installed",$addonsInstalled);
-	Config::set("cms.addons.not_installed",$addonsNotInstalled);
+        } else {
+            $addonsNotInstalled[] = $addon->addon_name;
+        }
 
-
+    }
+    Config::set("cms.addons.data", $addons);
+    Config::set("cms.addons.installed", $addonsInstalled);
+    Config::set("cms.addons.not_installed", $addonsNotInstalled);
 
 
 });
 
 
-App::after(function($request, $response)
-{
-	//
+App::after(function ($request, $response) {
+    //
 
 });
 
@@ -70,27 +80,21 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
-{
-	if (Auth::guest())
-	{
-		if (Request::ajax())
-		{
-			return Response::make('Unauthorized', 401);
-		}
-		else
-		{
-			return Redirect::guest('users/login')->with(
-                'message',Lang::get('messages.login_required')
+Route::filter('auth', function () {
+    if (Auth::guest()) {
+        if (Request::ajax()) {
+            return Response::make('Unauthorized', 401);
+        } else {
+            return Redirect::guest('users/login')->with(
+                'message', Lang::get('messages.login_required')
             );
-		}
-	}
+        }
+    }
 });
 
 
-Route::filter('auth.basic', function()
-{
-	return Auth::basic();
+Route::filter('auth.basic', function () {
+    return Auth::basic();
 });
 
 /*
@@ -104,9 +108,8 @@ Route::filter('auth.basic', function()
 |
 */
 
-Route::filter('guest', function()
-{
-	if (Auth::check()) return Redirect::to('/');
+Route::filter('guest', function () {
+    if (Auth::check()) return Redirect::to('/');
 });
 
 /*
@@ -120,10 +123,8 @@ Route::filter('guest', function()
 |
 */
 
-Route::filter('csrf', function()
-{
-	if (Session::token() != Input::get('_token'))
-	{
-		throw new Illuminate\Session\TokenMismatchException;
-	}
+Route::filter('csrf', function () {
+    if (Session::token() != Input::get('_token')) {
+        throw new Illuminate\Session\TokenMismatchException;
+    }
 });

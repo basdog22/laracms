@@ -5,11 +5,9 @@ class ThemesController extends BaseController{
     protected $area = 'backend';
 
     function manage(){
-        if (!Auth::check()){
-            return Redirect::to('users/login');
-        }
-        $themes = Config::get('cms.themes.data');
 
+        $themes = Config::get('cms.themes.data');
+        Event::fire('backend.themes.manage', array($themes));
         $this->layout->content = View::make('backend/themes')->with('themes',$themes);
     }
 
@@ -17,6 +15,7 @@ class ThemesController extends BaseController{
         if($themeid>1){
 
             $theme = Themes::find($themeid);
+            Event::fire('backend.themes.uninstall', array($theme));
             if($theme->active){
                 $default = Themes::find(1);
                 $default->active = 1;
@@ -35,6 +34,7 @@ class ThemesController extends BaseController{
     function install($themeid){
         if($themeid>1){
             $theme = Themes::find($themeid);
+            Event::fire('backend.themes.install', array($theme));
             $theme->installed = 1;
             $theme->save();
             return Redirect::to('themes/manage')->withMessage($this->notifyView(Lang::get('messages.theme_installed')));
@@ -55,6 +55,7 @@ class ThemesController extends BaseController{
                     $atheme->active = 0;
                     $atheme->save();
                 }else{
+                    Event::fire('backend.themes.activate', array($atheme));
                     $atheme->active = 1;
                     $atheme->save();
                 }

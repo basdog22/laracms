@@ -11,8 +11,15 @@
         <li>
             <a href="{{ url('backend/menus') }}" >
                 <i class="fa fa-th-list"></i>
-                {{ Lang::get('strings.menus') }}
+                {{ Lang::get('laracms::strings.menus') }}
             </a>
         </li>
+        <li>
+            <a href="{{ url('backend/settings') }}" >
+                <i class="fa fa-cogs"></i>
+                {{ Lang::get('strings.settings') }}
+            </a>
+        </li>
+        {{ Config::get('cms.addonlinks') }}
     </ul>
 </li>

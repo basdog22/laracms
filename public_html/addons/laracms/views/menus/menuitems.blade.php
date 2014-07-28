@@ -2,8 +2,8 @@
     <div id="breadcrumb" class="col-md-12">
         <ol class="breadcrumb">
             <li><a href="{{ url('backend/dashboard') }}">{{ Lang::get('strings.dashboard') }}</a></li>
-            <li><a href="{{ url('backend/menus') }}">{{ Lang::get('strings.menus') }}</a></li>
-            <li><a href="{{ url('backend/menuitems/'.$menu->id) }}">{{ Lang::get('strings.menuitems') }}</a></li>
+            <li><a href="{{ url('backend/menus') }}">{{ Lang::get('laracms::strings.menus') }}</a></li>
+            <li><a href="{{ url('backend/menuitems/'.$menu->id) }}">{{ Lang::get('laracms::strings.menuitems') }}</a></li>
         </ol>
     </div>
 </div>
@@ -13,12 +13,12 @@
             <div class="box-header">
                 <div class="box-name">
                     <i class="fa fa-cogs"></i>
-                    <span>{{ Lang::get('strings.menuitems') }}</span>
+                    <span>{{ Lang::get('laracms::strings.menuitems') }}</span>
                 </div>
                 <div class="box-icons">
                     <a href="{{url('backend/newmenuitem')}}" class="modal-link" style="width: auto">
                         <i class="fa fa-plus"></i>
-                        {{ Lang::get('strings.new_menuitem') }}
+                        {{ Lang::get('laracms::strings.new_menuitem') }}
                     </a>
 
                 </div>
@@ -29,7 +29,7 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>{{ Lang::get('strings.menuitem_title') }}</th>
+                        <th>{{ Lang::get('laracms::strings.menuitem_title') }}</th>
                         <th>{{ Lang::get('strings.actions') }}</th>
                     </tr>
                     </thead>
@@ -53,7 +53,7 @@
                     <tfoot>
                     <tr>
                         <th>#</th>
-                        <th>{{ Lang::get('strings.menuitem_title') }}</th>
+                        <th>{{ Lang::get('laracms::strings.menuitem_title') }}</th>
                         <th>{{ Lang::get('strings.actions') }}</th>
                     </tr>
                     </tfoot>

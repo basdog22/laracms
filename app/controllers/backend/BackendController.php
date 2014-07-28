@@ -8,10 +8,9 @@ class BackendController extends BaseController {
 
     public function dashboard()
 	{
-
+        Event::fire('backend.dashboard.before_load');
         $this->layout->content = View::make('backend/backend')->with('widgets',$this->layout->widgets);
-
-
+        Event::fire('backend.dashboard.after_load');
 	}
 
     public function help(){
