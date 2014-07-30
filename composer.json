@@ -13,8 +13,7 @@
 			"app/controllers",
 			"app/models",
 			"app/database/migrations",
-			"app/database/seeds",
-			"public_html/addons/"
+			"app/database/seeds"
 		]
 	},
 	"scripts": {

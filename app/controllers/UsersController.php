@@ -45,7 +45,7 @@ class UsersController extends BaseController {
     }
 
     public function manage(){
-        $users = User::paginate(20);
+        $users = User::paginate(Config::get('cms.auto_settings.backend.laracms.paging'));
         Event::fire('backend.users.manage', array($users));
         $this->useBackendLayout();
 

@@ -15,11 +15,22 @@ App::before(function ($request) {
     $addonsNotInstalled = $addonsInstalled = $themesNotInstalled = $themesInstalled = array();
     $addons = Addons::all();
     $themes = Themes::all();
+    foreach($addons as $addon){
+        if($addon->installed==1){
+            ClassLoader::addDirectories(array(
+                public_path() . "/addons/{$addon->addon_name}/controllers",
+                public_path() . "/addons/{$addon->addon_name}/models",
+                public_path() . "/addons/{$addon->addon_name}/helpers",
+            ));
+        }
+    }
     foreach ($themes as $theme) {
         if ($theme->installed == 1) {
             $themesInstalled[] = $theme->theme_name;
             if ($theme->active == 1) {
                 Config::set('cms.theme', $theme->theme_name);
+                //include the functions file
+                include_once public_path() . "/layouts/frontend/{$theme->theme_name}/func.php";
             }
         } else {
             $themesNotInstalled[] = $theme->theme_name;
@@ -44,9 +55,10 @@ App::before(function ($request) {
             if (file_exists(__DIR__ . "/../" . Config::get('cms.public_dir') . "/addons/{$addon->addon_name}/routes.php")) {
                 require __DIR__ . "/../" . Config::get('cms.public_dir') . "/addons/{$addon->addon_name}/routes.php";
             }
-            if (file_exists(__DIR__ . "/../" . Config::get('cms.public_dir') . "/addons/{$addon->addon_name}/filters.php")) {
-                require __DIR__ . "/../" . Config::get('cms.public_dir') . "/addons/{$addon->addon_name}/filters.php";
+            if (file_exists(__DIR__ . "/../" . Config::get('cms.public_dir') . "/addons/{$addon->addon_name}/func.php")) {
+                require __DIR__ . "/../" . Config::get('cms.public_dir') . "/addons/{$addon->addon_name}/func.php";
             }
+
             $namespace = $addon->addon_name;
             $path = public_path() . "/addons/{$addon->addon_name}/lang";
             Lang::addNamespace($namespace, $path);
@@ -56,6 +68,7 @@ App::before(function ($request) {
         }
 
     }
+
     Config::set("cms.addons.data", $addons);
     Config::set("cms.addons.installed", $addonsInstalled);
     Config::set("cms.addons.not_installed", $addonsNotInstalled);

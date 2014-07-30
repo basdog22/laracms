@@ -1,5 +1,5 @@
 <li>
-    <a href="{{ url('laramce/settings') }}" >
+    <a href="{{ url('backend/laramce') }}" >
         <i class="fa fa-cog"></i>
         TinyMCE: {{ Lang::get('strings.settings') }}
     </a>

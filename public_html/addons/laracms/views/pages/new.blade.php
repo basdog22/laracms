@@ -13,7 +13,7 @@
 </div>
 <div class="row">
     <div class="col-md-2">
-        <h2 class="form-signin-heading">{{ Lang::get('strings.pages') }}</h2>
+        <h2 class="form-signin-heading">{{ Lang::get('laracms::strings.pages') }}</h2>
         <ul class="nav nav-stacked">
             @foreach ($pages as $pag)
             <li>
@@ -32,29 +32,29 @@
         {{ Form::text('page_slug', $page->page_slug, array('class'=>'form-control', 'placeholder'=>Lang::get('strings.slug'))) }}
         {{ Form::label(Lang::get('strings.title')) }}
         {{ Form::text('title', $page->title, array('class'=>'form-control', 'placeholder'=>Lang::get('strings.title'))) }}
-        {{ Form::label(Lang::get('strings.subtitle')) }}
-        {{ Form::text('subtitle', $page->subtitle , array('class'=>'form-control', 'placeholder'=>Lang::get('strings.subtitle'))) }}
-        {{ Form::label(Lang::get('strings.content')) }}
-        {{ Form::textarea('content', $page->content , array('class'=>'form-control rte','id'=>'page-content', 'placeholder'=>Lang::get('strings.content'))) }}
+        {{ Form::label(Lang::get('laracms::strings.subtitle')) }}
+        {{ Form::text('subtitle', $page->subtitle , array('class'=>'form-control', 'placeholder'=>Lang::get('laracms::strings.subtitle'))) }}
+        {{ Form::label(Lang::get('laracms::strings.content')) }}
+        {{ Form::textarea('content', $page->content , array('class'=>'form-control rte','id'=>'page-content', 'placeholder'=>Lang::get('laracms::strings.content'))) }}
         {{ Form::label(Lang::get('strings.status')) }}
         {{ Form::checkbox('status', 1,$page->status) }}
         <div class="clearfix"></div>
-        {{ Form::submit(Lang::get('strings.save_page'), array('class'=>'btn btn-large btn-primary'))}}
-        {{ Form::submit(Lang::get('strings.save_page_close'), array('class'=>'btn btn-large btn-primary','name'=>'saveclose'))}}
+        {{ Form::submit(Lang::get('laracms::strings.save_page'), array('class'=>'btn btn-large btn-primary'))}}
+        {{ Form::submit(Lang::get('laracms::strings.save_page_close'), array('class'=>'btn btn-large btn-primary','name'=>'saveclose'))}}
         @else
         {{ Form::label(Lang::get('strings.slug')) }}
         {{ Form::text('page_slug', null, array('class'=>'form-control', 'placeholder'=>Lang::get('strings.slug'))) }}
         {{ Form::label(Lang::get('strings.title')) }}
         {{ Form::text('title', null, array('class'=>'form-control', 'placeholder'=>Lang::get('strings.title'))) }}
-        {{ Form::label(Lang::get('strings.subtitle')) }}
-        {{ Form::text('subtitle', null , array('class'=>'form-control', 'placeholder'=>Lang::get('strings.subtitle'))) }}
-        {{ Form::label(Lang::get('strings.content')) }}
-        {{ Form::textarea('content', null , array('class'=>'form-control rte','id'=>'page-content', 'placeholder'=>Lang::get('strings.content'))) }}
+        {{ Form::label(Lang::get('laracms::strings.subtitle')) }}
+        {{ Form::text('subtitle', null , array('class'=>'form-control', 'placeholder'=>Lang::get('laracms::strings.subtitle'))) }}
+        {{ Form::label(Lang::get('laracms::strings.content')) }}
+        {{ Form::textarea('content', null , array('class'=>'form-control rte','id'=>'page-content', 'placeholder'=>Lang::get('laracms::strings.content'))) }}
         {{ Form::label(Lang::get('strings.status')) }}
         {{ Form::checkbox('status',  1, true) }}
         <div class="clearfix"></div>
-        {{ Form::submit(Lang::get('strings.add_page'), array('class'=>'btn btn-large btn-primary'))}}
-        {{ Form::submit(Lang::get('strings.add_page_close'), array('class'=>'btn btn-large btn-primary','name'=>'saveclose'))}}
+        {{ Form::submit(Lang::get('laracms::strings.add_page'), array('class'=>'btn btn-large btn-primary'))}}
+        {{ Form::submit(Lang::get('laracms::strings.add_page_close'), array('class'=>'btn btn-large btn-primary','name'=>'saveclose'))}}
         @endif
 
         {{ Form::close() }}

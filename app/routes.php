@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(array('before' => 'auth'), function()
+Route::group(array('before' => 'auth','as'=>'backend'), function()
 {
     Route::get('backend/','BackendController@dashboard');
     Route::get('backend/help','BackendController@help');

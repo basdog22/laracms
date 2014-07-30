@@ -303,7 +303,7 @@ function LoadSelect2Script(callback){
 }
 
 function doSelects(){
-    $("select").select2();
+    $("select:not(.no-select2)").select2();
 }
 
 function TinyMCEStart(elem, mode){

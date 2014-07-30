@@ -4,7 +4,7 @@ class LaramceController extends BaseController{
     protected $layout = 'layouts.backend.devoops';
     protected $area = 'backend';
 
-    public function getSettings(){
+    public function settings(){
         $sel = Settings::whereRaw("section='laramce' AND setting_name='plugins'")->first();
 
         $sel = explode(" ",$sel->setting_value);
@@ -28,7 +28,7 @@ class LaramceController extends BaseController{
         return $plugs;
     }
 
-    public function postSave(){
+    public function save(){
 
         $settings = Settings::whereRaw("section='laramce' AND setting_name='plugins'")->first();
         if(!$settings->id){

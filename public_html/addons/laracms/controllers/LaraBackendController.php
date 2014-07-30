@@ -19,7 +19,7 @@ class LaraBackendController extends BaseController {
 
 
     public function menus(){
-        $menus = Menus::paginate(20);
+        $menus = Menus::paginate(Config::get('cms.auto_settings.backend.laracms.paging'));
         $this->layout->content = View::make('laracms/views/menus/menus')->with('menus',$menus);
     }
 
@@ -43,9 +43,14 @@ class LaraBackendController extends BaseController {
         }else{
             $settings = new Settings;
         }
-
+        $settings->area = Input::get('area');
+        $settings->section = Input::get('section');
         $settings->setting_name = Input::get('setting_name');
-        $settings->setting_value = Input::get('setting_name');
+        $settings->setting_value = Input::get('setting_value');
+        $settings->autoload = Input::get('autoload');
+        Event::fire('backend.settings.save', array($settings));
+        $settings->save();
+        return Redirect::to('backend/settings/')->withMessage($this->notifyView(Lang::get('laracms::messages.settings_saved'),'success'));
     }
 
     public function newmenuitem(){
@@ -141,18 +146,18 @@ class LaraBackendController extends BaseController {
     }
 
     public function pages(){
-        $pages = Pages::paginate(Config::get('auto_settings.backend.laracms.paging'));
+        $pages = Pages::paginate(Config::get('cms.auto_settings.backend.laracms.paging'));
         $this->layout->content = View::make('laracms/views/pages/pages')->with('pages',$pages);
     }
 
 
     public function newpage(){
-        $pages = Pages::paginate(20);
+        $pages = Pages::paginate(Config::get('cms.auto_settings.backend.laracms.paging'));
         $this->layout->content = View::make('laracms/views/pages/new')->with('pages',$pages);
     }
 
     public function editpage($pageid){
-        $pages = Pages::paginate(20);
+        $pages = Pages::paginate(Config::get('cms.auto_settings.backend.laracms.paging'));
         $page = Pages::find($pageid);
         $this->layout->content = View::make('laracms/views/pages/new')->with('pages',$pages)->with('page',$page);
     }

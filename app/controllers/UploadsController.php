@@ -450,8 +450,10 @@ class UploadsController extends BaseController
         $addon->author = $xml->author;
         $addon->url = $xml->url;
         $addon->installed = 0;
-        Event::fire('backend.addons.saveaddoninfo', array($addon));
         $addon->save();
+        //require the filters.php file to load the events to listen
+        require_once public_path() . "/addons/{$addon->addon_name}/filters.php";
+        Event::fire('backend.addons.saveaddoninfo', array($addon));
     }
 
     function saveThemeinfo($file,$source,$result){
