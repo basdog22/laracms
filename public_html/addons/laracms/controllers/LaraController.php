@@ -18,12 +18,13 @@ class LaraController extends BaseController {
 	|
 	*/
 
-	public function showMainpage()
-	{
-
-		$this->layout->content = View::make('laracms/views/lara');
+	public function showMainpage(){
+        $this->setLayoutContent('laracms/views/lara');
 	}
 
 
+    function test(){
+        $this->setLayoutContent('laracms/views/test',array('teo'=>'teodor','bill'=>'Vasilis'));
+    }
 
 }

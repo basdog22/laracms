@@ -2357,3 +2357,9 @@ td.beauty-hover {
     display: none;
   }
 }
+
+.droppable{
+    border:1px dashed #ccc;
+    padding:20px;
+    background:#eee;
+}

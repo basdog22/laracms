@@ -1,7 +1,6 @@
 <?php
 
 Route::get('/', 'LaraController@showMainpage');
-Route::get('/test', 'TestController@showMainpage');
 
 
 Route::group(array('prefix' => 'backend','as'=>'backend'), function()

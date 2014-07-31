@@ -76,7 +76,7 @@ class LaraBackendController extends BaseController {
 
     public function addmenuitem(){
         $menu = new Menuitems;
-        $menu->menuid = Input::get('menuid');
+        $menu->menus_id = Input::get('menuid');
         $menu->url = Input::get('url');
         $menu->link_text = Input::get('link_text');
         $menu->link_target = Input::get('link_target');
@@ -141,7 +141,7 @@ class LaraBackendController extends BaseController {
 
     public function menuitems($menuid){
         $menu = Menus::find($menuid);
-        $menuitems = Menuitems::where('menuid','=',$menuid)->get();
+        $menuitems = $menu->menuitems;
         $this->layout->content = View::make('laracms/views/menus/menuitems')->with('menuitems',$menuitems)->with('menu',$menu);
     }
 

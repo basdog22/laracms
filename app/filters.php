@@ -72,13 +72,13 @@ App::before(function ($request) {
     Config::set("cms.addons.data", $addons);
     Config::set("cms.addons.installed", $addonsInstalled);
     Config::set("cms.addons.not_installed", $addonsNotInstalled);
-
-
 });
 
 
 App::after(function ($request, $response) {
     //
+
+
 
 });
 

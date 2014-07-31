@@ -15,7 +15,7 @@ class CreateMenuitemsTable extends Migration {
         Schema::create('menuitems', function($table)
         {
             $table->increments('id');
-            $table->integer('menuid');
+            $table->integer('menus_id');
             $table->string('url',250);
             $table->string('link_text',250);
             $table->string('link_target',20);

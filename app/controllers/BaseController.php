@@ -11,6 +11,7 @@ class BaseController extends Controller
 
     protected $addonlinks;
 
+
     protected function setupLayout()
     {
 
@@ -92,6 +93,12 @@ class BaseController extends Controller
         }
 
 
+    }
+
+    public function setLayoutContent($view_path,$data=array()){
+        $view = View::make($view_path)->with($data);
+        Config::set('cms.controller.content',$view);
+        $this->layout->content = $view;
     }
 
     public function notifyView($message, $type = 'success')

@@ -69,12 +69,35 @@ class GridController extends BaseController{
 
     public function doeditblock(){
         $block = Blocks::find(Input::get('blockid'));
-
+        $contentBlocks = Block::getContentBlocks();
+        $contentBlock = $contentBlocks[$block->block_name];
         $block->event_to_fire = Input::get('event_to_fire');
         $block->view_path = Input::get('view_path');
-
+        $block->params = $this->getParams($contentBlock,Input::get());
         $block->save();
         return Redirect::to('backend/gridmanager/')->withMessage($this->notifyView(Lang::get('grid_manager::messages.block_saved'),'success'));
+    }
+
+    public function domoveblock(){
+        $blockid = Input::get('block');
+        $gridid = Input::get('grid');
+        $block = Blocks::find($blockid);
+        $block->block_position = $gridid;
+        $block->save();
+        return '';
+    }
+
+    function getParams($skeleton,$post){
+        $params = array();
+        if(isset($skeleton['params'])){
+            foreach($skeleton['params'] as $k=>$v){
+                if($post[$v['name']]){
+                    $params[$v['name']] = $post[$v['name']];
+                }
+            }
+        }
+
+        return serialize($params);
     }
 
     public function editgrid($gridid){
@@ -102,6 +125,14 @@ class GridController extends BaseController{
 
         return Redirect::to('backend/gridmanager/')->withMessage($this->notifyView(Lang::get('grid_manager::messages.grid_created'),'success'));
     }
+
+    public function delgrid($gridid){
+        $grid = Grids::find($gridid);
+        $grid->delete();
+        return Redirect::to('backend/gridmanager/')->withMessage($this->notifyView(Lang::get('grid_manager::messages.grid_deleted'),'success'));
+    }
+
+
 
     private function getRoutes(){
         $routeCollection = Route::getRoutes();
@@ -136,6 +167,7 @@ class GridController extends BaseController{
             $table->string('block_title',250);
             $table->string('block_name',250);
             $table->string('event_to_fire',160);
+            $table->text('params');
             $table->integer('sort');
             $table->timestamps();
 

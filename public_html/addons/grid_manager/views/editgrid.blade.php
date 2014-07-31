@@ -11,6 +11,7 @@
         {{ Form::textarea('grid_description', $grid->grid_description , array('class'=>'form-control', 'placeholder'=>Lang::get('grid_manager::strings.grid_description'))) }}
 
         {{ Form::submit(Lang::get('grid_manager::strings.savegrid'), array('class'=>'btn btn-large btn-primary'))}}
+        <a href="{{ url('backend/delgrid/'.$grid->id) }}" class="delbtn btn btn-danger pull-right">{{ Lang::get('strings.delete') }}</a>
         {{ Form::close() }}
     </div>
 

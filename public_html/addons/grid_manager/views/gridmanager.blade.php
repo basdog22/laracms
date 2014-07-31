@@ -3,7 +3,7 @@
         <ol class="breadcrumb ">
             <li><a href="{{ url('backend/dashboard') }}">{{ Lang::get('strings.dashboard') }}</a></li>
             <li><a href="{{ url('backend/gridmanager') }}">{{ Lang::get('grid_manager::strings.gridmanager') }}</a></li>
-            <li class="pull-right"><a style="margin: 0;line-height: 38px" href="{{ url('backend/addgrid') }}"  class="modal-link btn btn-primary">{{Lang::get('grid_manager::create_new_grid')}}</a></li>
+            <li class="pull-right"><a style="margin: 0;line-height: 38px" href="{{ url('backend/addgrid') }}"  class="modal-link btn btn-success">{{Lang::get('grid_manager::strings.create_new_grid')}}</a></li>
         </ol>
 
     </div>
@@ -23,7 +23,7 @@
                     <ul>
 
                         @foreach($grids as $grid)
-                        <li><a style="padding-right: 30px" href="#grid_{{ $grid->id }}">{{ $grid->grid_name }}</a> <a style="margin-left: -36px" class="fa fa-cog modal-link" href="{{ url('backend/editgrid/'.$grid->id) }}"></a></li>
+                        <li><a style="padding-right: 30px" href="#grid_{{ $grid->id }}">{{ $grid->grid_name }}</a> @if($grid->id>1) <a style="margin-left: -36px" class="fa fa-cog modal-link" href="{{ url('backend/editgrid/'.$grid->id) }}"></a>@endif</li>
                         @endforeach
                     </ul>
 
@@ -32,9 +32,9 @@
                         @foreach($positions as $k=>$position)
                         <div class="box clearfix row">
                             <div class="box-header">{{$k}}</div>
-                            <div class="box-content clearfix">
+                            <div class="box-content clearfix ">
                                 @foreach($position as $b=>$block)
-                                <div class="col-md-{{$block['cols']}} @if(isset($block['offset']))
+                                <div id="bgrid-{{$b}}" class="col-md-{{$block['cols']}} @if(isset($block['offset']))
                                  col-md-offset-{{$block['offset']}}
                                  @endif
                                  @if(isset($block['pull']))
@@ -49,10 +49,10 @@
                                             <a class="modal-link pull-right" href="{{ url('backend/addblock/'.$b.'-'.$grid->id) }}"><i class="fa fa-plus "></i></a>
                                         </div>
                                     </div>
-                                    <div class="box-content">
+                                    <div class="box-content drop">
                                         @foreach($grid->blocks as $blocks)
                                             @if($blocks->block_position==$b)
-                                            <div class="box">
+                                            <div class="box drg" id="{{$blocks->id}}">
                                                 <div class="box-header">
                                                     <div class="box-name">
                                                         <span>{{$blocks->block_title}}</span>

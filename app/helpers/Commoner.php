@@ -19,5 +19,6 @@ class Commoner{
             echo '</ol><div style="clear:left;"></div>';
         }
         $count++;
+        exit;
     }
 }

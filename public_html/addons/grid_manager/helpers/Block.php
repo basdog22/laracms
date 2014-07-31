@@ -1,6 +1,6 @@
 <?php
 
-class Block {
+class Block{
 
 
 
@@ -13,8 +13,12 @@ class Block {
         }
         $result = '';
         foreach($grid->blocks()->where('block_position','=',$position)->get() as $block){
-            $data = Event::fire($block->event_to_fire);
-            $result .= View::make($block->view_path);
+            $datas = Event::fire($block->event_to_fire,array(unserialize($block->params)));
+            foreach($datas as $data){
+                if(isset($data)){
+                    $result .= View::make($block->view_path)->with('data',$data);
+                }
+            }
         }
         return $result;
     }

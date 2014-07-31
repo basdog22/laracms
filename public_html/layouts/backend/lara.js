@@ -106,6 +106,26 @@ $(document).ready(function () {
             $(this).parent().parent().parent().addClass('active');
     });
 
+
+    $('.drg').draggable({
+        cursor: 'move',          // sets the cursor apperance
+        revert: 'valid',
+        revertDuration: 200,
+        opacity: 0.5
+    });
+
+    // sets droppable
+    $('.drop').droppable({
+        hoverClass: 'droppable',
+
+        drop: function(event, ui) {
+            // after the draggable is droped, hides it with a hide() effect
+            ui.draggable.appendTo(this);
+            var theid = $(this).parent().attr('id').split('-')[1];
+            saveBlockPosition(theid,ui.draggable.attr('id'));
+        }
+    });
+
     //assign hotkeys
     Mousetrap.bind(['command+l', 'ctrl+l'], function(e) {
         if($.cookie('locked')==1){
@@ -136,6 +156,12 @@ $(document).ready(function () {
         return false;
     });
 });
+
+function saveBlockPosition(gridid,blockid){
+    $.post("/backend/moveblock", {grid:gridid,block:blockid},function(data) {
+
+    });
+}
 
 function lockScreen(){
 
