@@ -1,15 +1,17 @@
 <?php
 
 Route::get('/', 'LaraController@showMainpage');
+Route::get('page/{slug}', 'LaraController@showpage');
 
 
 Route::group(array('prefix' => 'backend','as'=>'backend'), function()
 {
     Route::get('menus', 'LaraBackendController@menus');
     Route::get('newmenu', 'LaraBackendController@newmenu');
-    Route::get('newmenuitem', 'LaraBackendController@newmenuitem');
 
+    Route::get('contenttype', 'LaraBackendController@contentypes');
 
+    Route::get('newmenuitem/{menuid}', 'LaraBackendController@newmenuitem');
     Route::get('menuitems/{menuid}','LaraBackendController@menuitems');
     Route::get('editmenu/{menuid}','LaraBackendController@editmenu');
     Route::get('editmenuitem/{menuitemid}','LaraBackendController@editmenuitem');
@@ -24,6 +26,7 @@ Route::group(array('prefix' => 'backend','as'=>'backend'), function()
 
 
     Route::post('savesettings', 'LaraBackendController@savesettings');
+    Route::post('menuitemsort', 'LaraBackendController@menuitemsort');
 
     Route::post('savemenu', 'LaraBackendController@savemenu');
     Route::post('addmenu', 'LaraBackendController@addmenu');

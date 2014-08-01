@@ -53,16 +53,22 @@ class LaraBackendController extends BaseController {
         return Redirect::to('backend/settings/')->withMessage($this->notifyView(Lang::get('laracms::messages.settings_saved'),'success'));
     }
 
-    public function newmenuitem(){
-        $menus = Menus::all();
+    public function menuitemsort(){
+        $menuitem = Menuitems::find(Input::get('itemid'));
+        $menuitem->sort = Input::get('newsort');
+        $menuitem->save();
+        return Response::json(array('type' => 'success', 'text' => Lang::get('laracms::messages.sort_saved')));
+    }
+    public function newmenuitem($menuid){
+        $menus = Menus::find($menuid);
         $sel = array();
-        foreach($menus as $menu){
-            $sel[$menu->id] = $menu->menu_title;
-        }
+
+           $sel[$menus->id] = $menus->menu_title;
+        $content = Event::fire('laracms.collect.content.types');
         if (Request::ajax()){
-            return View::make('laracms/views/menus/newmenuitem')->with('menus',$sel);
+            return View::make('laracms/views/menus/newmenuitem')->with('menus',$sel)->with('content',$content);
         }else{
-            $this->layout->content = View::make('laracms/views/menus/newmenuitem')->with('menus',$sel);
+            $this->layout->content = View::make('laracms/views/menus/newmenuitem')->with('menus',$sel)->with('content',$content);
         }
     }
 
@@ -74,10 +80,21 @@ class LaraBackendController extends BaseController {
         return Redirect::to('backend/menus')->withMessage($this->notifyView(Lang::get('laracms::messages.menu_created'),'success'));
     }
 
+    public function contentypes(){
+        $content = Event::fire('laracms.collect.content.types');
+//        Commoner::debug($content);
+        if (Request::ajax()){
+            return View::make('laracms/views/contenttypes')->with('content',$content);
+        }else{
+            $this->layout->content = View::make('laracms/views/contenttypes')->with('content',$content);
+        }
+    }
+
     public function addmenuitem(){
         $menu = new Menuitems;
         $menu->menus_id = Input::get('menuid');
         $menu->url = Input::get('url');
+        $menu->model = (Input::get('model')!=0)?Input::get('model'):'';
         $menu->link_text = Input::get('link_text');
         $menu->link_target = Input::get('link_target');
         $menu->link_attr = Input::get('link_attr');
@@ -89,15 +106,15 @@ class LaraBackendController extends BaseController {
 
     public function editmenuitem($menuitemid){
         $menuitem = Menuitems::find($menuitemid);
-        $menus = Menus::all();
+        $menus = Menus::find($menuitem->menus_id);
         $sel = array();
-        foreach($menus as $menu){
-            $sel[$menu->id] = $menu->menu_title;
-        }
+
+        $sel[$menus->id] = $menus->menu_title;
+        $content = Event::fire('laracms.collect.content.types');
         if (Request::ajax()){
-            return View::make('laracms/views/menus/editmenuitem')->with('menuitem',$menuitem)->with('menus',$sel);
+            return View::make('laracms/views/menus/editmenuitem')->with('menuitem',$menuitem)->with('menus',$sel)->with('content',$content);
         }else{
-            $this->layout->content = View::make('laracms/views/menus/editmenuitem')->with('menuitem',$menuitem)->with('menus',$sel);
+            $this->layout->content = View::make('laracms/views/menus/editmenuitem')->with('menuitem',$menuitem)->with('menus',$sel)->with('content',$content);
         }
 
     }
@@ -127,9 +144,11 @@ class LaraBackendController extends BaseController {
     }
 
     public function savemenuitem(){
+//        Commoner::debug(Input::get());
         $menu = Menuitems::find(Input::get('menuitemid'));
-        $menu->menuid = Input::get('menuid');
+        $menu->menus_id = Input::get('menuid');
         $menu->url = Input::get('url');
+        $menu->model = (Input::get('model')!=0)?Input::get('model'):'';
         $menu->link_text = Input::get('link_text');
         $menu->link_target = Input::get('link_target');
         $menu->link_attr = Input::get('link_attr');

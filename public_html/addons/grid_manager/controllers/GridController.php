@@ -84,7 +84,7 @@ class GridController extends BaseController{
         $block = Blocks::find($blockid);
         $block->block_position = $gridid;
         $block->save();
-        return '';
+        return Response::json(array('type' => 'success', 'text' => Lang::get('grid_manager::messages.block_position_changed')));
     }
 
     function getParams($skeleton,$post){

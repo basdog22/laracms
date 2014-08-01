@@ -23,9 +23,13 @@
 
 		<!--Start Content-->
 		<div id="content" class="col-xs-12 col-sm-10">
-            @if(Session::has('message'))
+            <div id="notifications-container">
+                @if(Session::has('message'))
                 {{ Session::get('message') }}
-           @endif
+                @endif
+            </div>
+
+
             {{ $content }}
 		</div>
 		<!--End Content-->

@@ -8,6 +8,8 @@ $(document).ready(function () {
         return false;
     });
 
+
+
     $('#laraModal').on('show.bs.modal', function () {
         var modalBody = $(this).find('.modal-body');
         var modalDialog = $(this).find('.modal-dialog');
@@ -76,11 +78,8 @@ $(document).ready(function () {
         ScreenSaver();
     });
     $('#screen_unlock').on('click', function(){
-        var header = 'Enter current username and password';
-        var form = $('<div class="form-group"><label class="control-label">Username</label><input type="text" class="form-control" name="username" /></div>'+
-            '<div class="form-group"><label class="control-label">Password</label><input type="password" class="form-control" name="password" /></div>');
-        var button = $('<div class="text-center"><a href="index.html" class="btn btn-primary">Unlock</a></div>');
-        OpenModalBox(header, form, button);
+
+        OpenModalBox();
     });
 
     if($.cookie('locked')==1){
@@ -107,24 +106,7 @@ $(document).ready(function () {
     });
 
 
-    $('.drg').draggable({
-        cursor: 'move',          // sets the cursor apperance
-        revert: 'valid',
-        revertDuration: 200,
-        opacity: 0.5
-    });
 
-    // sets droppable
-    $('.drop').droppable({
-        hoverClass: 'droppable',
-
-        drop: function(event, ui) {
-            // after the draggable is droped, hides it with a hide() effect
-            ui.draggable.appendTo(this);
-            var theid = $(this).parent().attr('id').split('-')[1];
-            saveBlockPosition(theid,ui.draggable.attr('id'));
-        }
-    });
 
     //assign hotkeys
     Mousetrap.bind(['command+l', 'ctrl+l'], function(e) {
@@ -157,16 +139,12 @@ $(document).ready(function () {
     });
 });
 
-function saveBlockPosition(gridid,blockid){
-    $.post("/backend/moveblock", {grid:gridid,block:blockid},function(data) {
 
-    });
-}
 
 function lockScreen(){
 
 }
-function OpenModalBox(header, inner, bottom){
+function OpenModalBox(){
     var who = window.prompt("Who are you?");
     if(who=='laracms'){
         $.cookie('locked',0,{ expires: 7, path:'/' });
@@ -364,4 +342,8 @@ function TinyMCEStart(elem, mode){
 
 function SetMinBlockHeight(elem){
     elem.css('min-height', window.innerHeight - 50)
+}
+
+function notifyJs(data){
+    $('<div class="alert alert-'+data.type+' alert-dismissible " role="alert"><button data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>'+data.text+'</div>').appendTo('#notifications-container');
 }

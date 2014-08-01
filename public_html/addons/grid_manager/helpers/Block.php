@@ -8,7 +8,7 @@ class Block{
         $route = Route::getCurrentRoute()->getActionName();
         //get the location for this route
         $grid = Grids::where('route','=',$route)->first();
-        if(!$grid->id){
+        if(!isset($grid->id)){
             $grid = Grids::find(1);
         }
         $result = '';

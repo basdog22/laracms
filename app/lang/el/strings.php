@@ -54,5 +54,10 @@ return array(
     'new'        =>  'Προσθήκη',
     'save_settings' => 'Αποθήκευση Ρυθμίσεων',
     'please_select' => 'Παρακαλώ επιλέξτε',
+    'lock_unlock_screen' => 'Κλείδωμα / Ξεκλείδωμα οθόνης',
+    'toggle_sidebar' => 'Άνοιγμα / Κλείσιμο πλαϊνής μπάρας',
+    'navigate_users' => 'Πλοήγηση στους χρήστες',
+    'navigate_themes' => 'Πλοήγηση στα θέματα',
+    'navigate_addons' => 'Πλοήγηση στα πρόσθετα',
 
 );

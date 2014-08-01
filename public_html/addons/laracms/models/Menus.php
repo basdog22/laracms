@@ -6,7 +6,7 @@ class Menus extends Eloquent
     protected $table='menus';
 
     public function menuitems(){
-        return $this->hasMany('Menuitems');
+        return $this->hasMany('Menuitems')->orderby('sort','asc');
     }
 
     static function getForSelect(){

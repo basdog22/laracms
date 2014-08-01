@@ -56,8 +56,8 @@
                     <tfoot>
                     <tr>
                         <th>#</th>
-                        <th>{{ Lang::get('strings.menu_name') }}</th>
-                        <th>{{ Lang::get('strings.menu_title') }}</th>
+                        <th>{{ Lang::get('laracms::strings.menu_name') }}</th>
+                        <th>{{ Lang::get('laracms::strings.menu_title') }}</th>
                         <th>{{ Lang::get('strings.actions') }}</th>
                     </tr>
                     </tfoot>

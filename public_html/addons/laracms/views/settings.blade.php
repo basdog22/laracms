@@ -36,7 +36,7 @@
         {{ Form::submit(Lang::get('strings.save_settings'), array('class'=>'btn btn-large btn-primary'))}}
         {{ Form::close() }}
 
-        @endforeach;
+        @endforeach
 
     </div>
 </div>

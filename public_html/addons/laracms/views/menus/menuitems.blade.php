@@ -16,7 +16,7 @@
                     <span>{{ Lang::get('laracms::strings.menuitems') }}</span>
                 </div>
                 <div class="box-icons">
-                    <a href="{{url('backend/newmenuitem')}}" class="modal-link" style="width: auto">
+                    <a href="{{url('backend/newmenuitem/'.$menu->id)}}" class="modal-link" style="width: auto">
                         <i class="fa fa-plus"></i>
                         {{ Lang::get('laracms::strings.new_menuitem') }}
                     </a>
@@ -29,6 +29,7 @@
                     <thead>
                     <tr>
                         <th>#</th>
+                        <th>{{ Lang::get('laracms::strings.menuitem_sort') }}</th>
                         <th>{{ Lang::get('laracms::strings.menuitem_title') }}</th>
                         <th>{{ Lang::get('strings.actions') }}</th>
                     </tr>
@@ -37,6 +38,7 @@
                     @foreach ($menuitems as $menuitem)
                     <tr>
                         <td>{{ $menuitem->id }}</td>
+                        <td><input class="auto-update-sort col-md-1" id="{{ $menuitem->id }}" type="number" value="{{ $menuitem->sort }}" /></td>
                         <td><a href="{{ url('backend/editmenuitem/'.$menuitem->id) }}">{{ $menuitem->link_text }}</a></td>
                         <td>
                             <div class="btn-group">
@@ -53,6 +55,7 @@
                     <tfoot>
                     <tr>
                         <th>#</th>
+                        <th>{{ Lang::get('laracms::strings.menuitem_sort') }}</th>
                         <th>{{ Lang::get('laracms::strings.menuitem_title') }}</th>
                         <th>{{ Lang::get('strings.actions') }}</th>
                     </tr>

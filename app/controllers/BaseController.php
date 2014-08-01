@@ -97,6 +97,7 @@ class BaseController extends Controller
 
     public function setLayoutContent($view_path,$data=array()){
         $view = View::make($view_path)->with($data);
+//       Commoner::debug($view);
         Config::set('cms.controller.content',$view);
         $this->layout->content = $view;
     }

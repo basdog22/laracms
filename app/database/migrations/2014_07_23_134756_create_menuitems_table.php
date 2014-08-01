@@ -16,6 +16,8 @@ class CreateMenuitemsTable extends Migration {
         {
             $table->increments('id');
             $table->integer('menus_id');
+            $table->string('model');
+            $table->integer('sort')->index();
             $table->string('url',250);
             $table->string('link_text',250);
             $table->string('link_target',20);

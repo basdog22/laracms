@@ -1,5 +1,18 @@
 <?php
 
+
+Event::listen('laracms.collect.content.types', function () {
+    return array(
+        array(
+            'type'  =>  'pages',
+            'title' =>  'Pages',
+            'slug'  =>  'page',
+            'model' =>  'Pages'
+        ),
+
+    );
+}, 1);
+
 Event::listen('backend.widgets.create', function () {
     return array(
         'laracms/extends/backend/widgets'
@@ -45,7 +58,23 @@ Event::listen('laracms.pages.last', function ($params) {
 }, 1);
 
 Event::listen('laracms.menus.specific', function ($params) {
-    return Menus::find($params['menuid']);
+    $menu = Menus::find($params['menuid']);
+    $it = $menu->menuitems;
+    $items = array();
+    foreach($it as $k=>$ti){
+        $items[$k] = $ti;
+        if($ti->model!=''){
+            $model = $ti->model;
+            $items[$k]->subs = $model::all();
+
+        }
+
+    }
+
+    return array(
+        'menu'  =>  $menu,
+        'items' =>  $items
+    );
 }, 1);
 
 

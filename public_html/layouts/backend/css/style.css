@@ -2363,3 +2363,18 @@ td.beauty-hover {
     padding:20px;
     background:#eee;
 }
+
+.form-control-smaller{
+    display: inline-block;
+    width:95%;
+    margin: 5px 0;
+}
+
+.popover{
+    z-index: 9999;
+}
+
+.popover-bigger{
+    max-width: 700px;
+    width: 700px;
+}

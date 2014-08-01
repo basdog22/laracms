@@ -7,4 +7,5 @@ return array(
     'grid_deleted'   =>  'Η τοποθεσία διαγράφηκε',
     'block_saved'   =>  'Το block περιεχομένου αποθηκεύτηκε',
     'grid_saved'   =>  'Η τοποθεσία αποθηκεύτηκε',
+    'block_position_changed'   =>  'Η θέση του block άλλαξε',
 );

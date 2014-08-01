@@ -23,8 +23,10 @@ class LaraController extends BaseController {
 	}
 
 
-    function test(){
-        $this->setLayoutContent('laracms/views/test',array('teo'=>'teodor','bill'=>'Vasilis'));
+    function showpage($slug){
+        $page = Pages::page($slug);
+
+        $this->setLayoutContent('laracms/views/pages/page',array('page'=>$page));
     }
 
 }
