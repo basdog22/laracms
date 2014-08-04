@@ -37,4 +37,11 @@ return array(
     'save_menuitem'        =>  'Αποθήκευση αντικειμένου Menu',
     'menuitem_sort'        =>  'Σειρά',
     'submenu_from'        =>  'Υπομενού από',
+    'all_pages'        =>  'Όλες οι σελίδες',
+    'last_page'        =>  'Τελευταία σελίδα',
+    'show_as_links'        =>  'Προβολή σαν σύνδεσμοι',
+    'show_full_page'        =>  'Πλήρης προβολή',
+    'main_content'        =>  'Κύριο περιεχόμενο',
+    'load_main_content'        =>  'Φόρτωση κυρίως περιεχόμενο',
+    'specific_menu'        =>  'Συγκεκριμένο menu',
 );

@@ -18,4 +18,13 @@ class Menus extends Eloquent
         return $sel;
     }
 
+    public function delete()
+    {
+        // delete all related blocks
+        $this->menuitems()->delete();
+
+        // delete the grid
+        return parent::delete();
+    }
+
 }

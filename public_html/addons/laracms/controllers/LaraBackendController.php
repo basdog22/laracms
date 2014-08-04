@@ -90,11 +90,35 @@ class LaraBackendController extends BaseController {
         }
     }
 
+    public function imggallery(){
+        $content = scandir(public_path()."/uploads/");
+        $files = array();
+        foreach($content as $item){
+            if($item!='.' && $item!='..'  && $item!='.quarantine'  && $item!='.tmb'){
+                $ext =explode(".",$item);
+                $ext = end($ext);
+                $ext = strtolower($ext);
+
+                if(in_array($ext,array('gif','png','jpg','jpeg','bmp'))){
+                    $files[] = $item;
+                }
+            }
+
+        }
+        if (Request::ajax()){
+            return View::make('laracms/views/imggallery')->with('content',$files);
+        }else{
+            $this->layout->content = View::make('laracms/views/imggallery')->with('content',$files);
+        }
+    }
+
     public function addmenuitem(){
         $menu = new Menuitems;
         $menu->menus_id = Input::get('menuid');
         $menu->url = Input::get('url');
-        $menu->model = (Input::get('model')!=0)?Input::get('model'):'';
+        $model = (Input::get('model'))?Input::get('model'):'';
+
+        $menu->model = $model;
         $menu->link_text = Input::get('link_text');
         $menu->link_target = Input::get('link_target');
         $menu->link_attr = Input::get('link_attr');
@@ -126,6 +150,13 @@ class LaraBackendController extends BaseController {
         return Redirect::to('backend/menus')->withMessage($this->notifyView(Lang::get('messages.menu_deleted')));
     }
 
+    public function delmenuitem($menuitemid){
+        $menu = Menuitems::find($menuitemid);
+        $id = $menu->menus_id;
+        $menu->delete();
+        return Redirect::to('backend/menuitems/'.$id)->withMessage($this->notifyView(Lang::get('messages.menuitem_deleted')));
+    }
+
     public function editmenu($menuid){
         $menu = Menus::find($menuid);
         if (Request::ajax()){
@@ -144,11 +175,10 @@ class LaraBackendController extends BaseController {
     }
 
     public function savemenuitem(){
-//        Commoner::debug(Input::get());
         $menu = Menuitems::find(Input::get('menuitemid'));
         $menu->menus_id = Input::get('menuid');
         $menu->url = Input::get('url');
-        $menu->model = (Input::get('model')!=0)?Input::get('model'):'';
+        $menu->model = (Input::get('model'))?Input::get('model'):'';
         $menu->link_text = Input::get('link_text');
         $menu->link_target = Input::get('link_target');
         $menu->link_attr = Input::get('link_attr');
@@ -187,7 +217,7 @@ class LaraBackendController extends BaseController {
         }else{
             $page = new Pages;
         }
-        $page->page_slug = Input::get('page_slug');
+        $page->slug = Input::get('page_slug');
         $page->title = Input::get('title');
         $page->subtitle = Input::get('subtitle');
         $page->content = Input::get('content');

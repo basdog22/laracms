@@ -59,5 +59,6 @@ return array(
     'navigate_users' => 'Πλοήγηση στους χρήστες',
     'navigate_themes' => 'Πλοήγηση στα θέματα',
     'navigate_addons' => 'Πλοήγηση στα πρόσθετα',
+    'default' => 'Προεπιλογή',
 
 );

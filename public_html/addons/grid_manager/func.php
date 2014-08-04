@@ -18,12 +18,30 @@ Event::listen('backend.header.create', function () {
     );
 }, 1);
 
-Event::listen('backend.addons.saveaddoninfo', function ($addon) {
+Event::listen('backend.addons.saveaddoninfo.grid_manager', function ($addon) {
     Schema::create('gridmanager', function($table)
     {
         $table->increments('id');
-
+        $table->string('route','100')->index();
+        $table->string('grid_name',100);
+        $table->string('grid_title',100);
+        $table->string('grid_description',160);
         $table->timestamps();
-		
+
+    });
+
+    Schema::create('gridmanager_blocks', function($table)
+    {
+        $table->increments('id');
+        $table->integer('grids_id');
+        $table->string('block_position',250);
+        $table->string('view_path',250);
+        $table->string('block_title',250);
+        $table->string('block_name',250);
+        $table->string('event_to_fire',160);
+        $table->text('params');
+        $table->integer('sort');
+        $table->timestamps();
+
     });
 }, 1);

@@ -29,8 +29,11 @@
 
         $(document).on('click', '.close-popup', function (e) {
             e.preventDefault();
-            $("input[name='url']").val($(this).data('href'));
-            $("input[name='link_text']").val($(this).html());
+            $("input[name='"+$(this).data('appendto')+"']").val($(this).data('href'));
+            if($("input[name='link_text']").length){
+                $("input[name='link_text']").val($(this).html());
+            }
+
             $(this).parent().parent().parent().parent().parent().parent().parent().remove();
             return false;
 

@@ -15,7 +15,7 @@ class CreateTablePages extends Migration {
         Schema::create('pages', function($table)
         {
             $table->increments('id');
-            $table->string('page_slug',150);
+            $table->string('slug',150);
             $table->string('title',250);
             $table->string('subtitle',250);
             $table->text('content');

@@ -2,6 +2,7 @@
 return array(
     'menu_created'  =>  'Το menu δημιουργήθηκε',
     'menu_deleted'  =>  'Το menu διαγράφηκε',
+    'menuitem_deleted'  =>  'Το αντικείμενο menu διαγράφηκε',
     'menuitem_created'  =>  'Το αντικείμενο μενού δημιουργήθηκε',
     'menu_saved'  =>  'Το menu αποθηκεύτηκε',
     'menuitem_saved'  =>  'Το αντικείμενο μενού αποθηκεύτηκε',

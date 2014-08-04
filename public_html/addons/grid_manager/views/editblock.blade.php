@@ -7,15 +7,19 @@
         @foreach($contentblock['params'] as $param)
         {{ Form::label($param['label']) }}
         @if($param['type']=='select')
-        {{ Form::$param['type']($param['name'],$param['options']) }}
+        @if(isset($param['attr']))
+        {{ Form::$param['type']($param['name']."[]",$param['options'],explode(",",implode(",",$params[$param['name']])),array($param['attr'])) }}
+        @else
+        {{ Form::$param['type']($param['name'],$param['options']),$params[$param['name']] }}
+        @endif
         @else
         {{ Form::$param['type']($param['name']) }}
         @endif
         @endforeach
         @endif
         {{ Form::label(Lang::get('grid_manager::strings.blocks')) }}
-        {{ Form::select('view_path',$contentblock['views_path']) }}
-        {{ Form::select('event_to_fire',$contentblock['events_to_fire']) }}
+        {{ Form::select('view_path',$contentblock['views_path'],array($block->view_path)) }}
+        {{ Form::select('event_to_fire',$contentblock['events_to_fire'],array($block->event_to_fire)) }}
         {{ Form::submit(Lang::get('grid_manager::strings.saveblock'), array('class'=>'btn btn-large btn-primary'))}}
         {{ Form::close() }}
     </div>

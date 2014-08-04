@@ -10,11 +10,13 @@ Route::group(array('prefix' => 'backend','as'=>'backend'), function()
     Route::get('newmenu', 'LaraBackendController@newmenu');
 
     Route::get('contenttype', 'LaraBackendController@contentypes');
+    Route::get('imggallery', 'LaraBackendController@imggallery');
 
     Route::get('newmenuitem/{menuid}', 'LaraBackendController@newmenuitem');
     Route::get('menuitems/{menuid}','LaraBackendController@menuitems');
     Route::get('editmenu/{menuid}','LaraBackendController@editmenu');
     Route::get('editmenuitem/{menuitemid}','LaraBackendController@editmenuitem');
+    Route::get('delmenuitem/{menuitemid}','LaraBackendController@delmenuitem');
     Route::get('delmenu/{menuid}','LaraBackendController@delmenu');
 
 

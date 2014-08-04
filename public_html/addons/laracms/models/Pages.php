@@ -6,7 +6,7 @@ class Pages extends Eloquent
     protected $table='pages';
 
     static function page($slug){
-        $page = Pages::where('page_slug','=',$slug)->first();
+        $page = Pages::where('slug','=',$slug)->first();
         return $page;
     }
 

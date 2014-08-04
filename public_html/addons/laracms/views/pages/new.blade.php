@@ -29,7 +29,7 @@
         @if(isset($page))
         {{ Form::hidden('pageid', $page->id) }}
         {{ Form::label(Lang::get('strings.slug')) }}
-        {{ Form::text('page_slug', $page->page_slug, array('class'=>'form-control', 'placeholder'=>Lang::get('strings.slug'))) }}
+        {{ Form::text('page_slug', $page->slug, array('class'=>'form-control', 'placeholder'=>Lang::get('strings.slug'))) }}
         {{ Form::label(Lang::get('strings.title')) }}
         {{ Form::text('title', $page->title, array('class'=>'form-control', 'placeholder'=>Lang::get('strings.title'))) }}
         {{ Form::label(Lang::get('laracms::strings.subtitle')) }}

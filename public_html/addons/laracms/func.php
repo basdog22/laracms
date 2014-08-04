@@ -4,10 +4,10 @@
 Event::listen('laracms.collect.content.types', function () {
     return array(
         array(
-            'type'  =>  'pages',
-            'title' =>  'Pages',
-            'slug'  =>  'page',
-            'model' =>  'Pages'
+            'type' => 'pages', //the content type
+            'title' => Lang::get('laracms::strings.pages'), //the title to display
+            'slug' => 'page', //the slug that will be prepend on the item slug. eg: /page/about-us
+            'model' => 'Pages' //the model to pull items from
         ),
 
     );
@@ -61,19 +61,34 @@ Event::listen('laracms.menus.specific', function ($params) {
     $menu = Menus::find($params['menuid']);
     $it = $menu->menuitems;
     $items = array();
-    foreach($it as $k=>$ti){
-        $items[$k] = $ti;
-        if($ti->model!=''){
-            $model = $ti->model;
-            $items[$k]->subs = $model::all();
+    $content = Event::fire('laracms.collect.content.types');
 
+    foreach ($it as $k => $ti) {
+        $items[$k] = $ti;
+        $subs = array();
+        if ($ti->model != '') {
+            $model = $ti->model;
+            foreach ($content as $ptype) {
+                foreach ($ptype as $ctype) {
+
+                    if ($model == $ctype['model']) {
+                        $slug = $ctype['slug'];
+                    }
+                }
+            }
+            $subitems = $model::all();
+            foreach ($subitems as $subitem) {
+                $subitem->slug = $slug ."/". $subitem->slug;
+                $subs[] = $subitem;
+            }
+            $items[$k]->subs = $subs;
         }
 
     }
 
     return array(
-        'menu'  =>  $menu,
-        'items' =>  $items
+        'menu' => $menu,
+        'items' => $items
     );
 }, 1);
 
@@ -83,40 +98,40 @@ Event::listen('content.blocks.collect', function () {
     $blocks = (is_array($blocks)) ? $blocks : array();
     $blocks = array_merge($blocks, array(
         'larapages' => array(
-            'block_title' => 'Pages',
+            'block_title' => Lang::get('laracms::strings.pages'),
             'events_to_fire' => array(
-                'laracms.pages.all' => 'All Pages',
-                'laracms.pages.last' => 'Last Page'
+                'laracms.pages.all' => Lang::get('laracms::strings.all_pages'),
+                'laracms.pages.last' => Lang::get('laracms::strings.last_page')
             ),
             'views_path' => array(
-                'laracms/views/pages/blocks/links' => 'Links',
-                'laracms/views/pages/blocks/full' => 'Full'
+                'laracms/views/pages/blocks/links' => Lang::get('laracms::strings.show_as_links'),
+                'laracms/views/pages/blocks/full' => Lang::get('laracms::strings.show_full_page')
             ),
         ),
         'maincontroller' => array(
-            'block_title' => 'Main Content',
+            'block_title' => Lang::get('laracms::strings.main_content'),
             'events_to_fire' => array(
-                'laracms.main.content' => 'Load Main Content',
+                'laracms.main.content' => Lang::get('laracms::strings.load_main_content'),
             ),
             'views_path' => array(
-                'laracms/views/main/maincontent' => 'Default'
+                'laracms/views/main/maincontent' => Lang::get('strings.default')
             ),
         ),
         'laramenus' => array(
-            'block_title' => 'Menus',
-            'params'    =>  array(
+            'block_title' => Lang::get('laracms::strings.menus'),
+            'params' => array(
                 array(
-                    'type'  =>  'select',
-                    'name'  =>  'menuid',
-                    'label' =>  'Select Menu',
-                    'options'=> Menus::getForSelect()
+                    'type' => 'select',
+                    'name' => 'menuid',
+                    'label' => Lang::get('strings.please_select'),
+                    'options' => Menus::getForSelect()
                 ),
             ),
             'events_to_fire' => array(
-                'laracms.menus.specific' => 'Specific Menu',
+                'laracms.menus.specific' => Lang::get('laracms::strings.specific_menu'),
             ),
             'views_path' => array(
-                'laracms/views/menus/blocks/specific' => 'Default'
+                'laracms/views/menus/blocks/specific' => Lang::get('strings.default')
             ),
         )
     ));
