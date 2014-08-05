@@ -32,6 +32,19 @@ class Installer{
         $addon->url = 'http://www.bonweb.gr';
         $addon->installed = 1;
         $addon->save();
+        ClassLoader::addDirectories(array(
+            public_path() . "/addons/laracms/controllers",
+            public_path() . "/addons/laracms/models",
+            public_path() . "/addons/laracms/helpers",
+        ));
+        //add the screensaver setting
+        $setting = new Settings;
+        $setting->area = 'backend';
+        $setting->section = 'laracms';
+        $setting->setting_name = 'screensaver';
+        $setting->setting_value = '60000';
+        $setting->autoload = 1;
+        $setting->save();
         //grid manager
         $addon = new Addons;
         $addon->addon_name = 'grid_manager';
@@ -51,8 +64,8 @@ class Installer{
         Event::fire('backend.addons.saveaddoninfo.grid_manager',array($addon));
         //themes
         $theme = new Themes;
-        $theme->theme_name = 'sample';
-        $theme->theme_title = 'Sample Theme';
+        $theme->theme_name = 'lara';
+        $theme->theme_title = 'LaraCMS Default Theme';
         $theme->icon_image = 'http://laravel.com/assets/img/logo-head.png';
         $theme->version = '1.0.1';
         $theme->author = 'bonweb';

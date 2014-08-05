@@ -46,7 +46,7 @@
     <td>{{ $addon->version }}</td>
     <td>{{ ($addon->installed)?Lang::get('strings.yes'):Lang::get('strings.no') }}</td>
     <td>
-        @if ($addon->id==1 || $addon->addon_name=='laracms')
+        @if ($addon->id<2 || $addon->addon_name=='laracms' || $addon->addon_name=='grid_manager')
         -
         @else
         <a class="btn btn-{{ ($addon->installed)?'danger':'success' }}" href="{{ ($addon->installed)?url('addons/uninstall/'.$addon->id):url('addons/install/'.$addon->id)}}">

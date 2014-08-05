@@ -8,8 +8,7 @@ Edit app/config/database.php and set desired database
 Edit app/config/app.php and set desired domain
 
 1. The Artisan way
-   Run:
-     php artisan migrate
+   Run: [code]php artisan migrate
 
 2. The LaraCMS way
    If for example the cms is installed on www.example.com
@@ -22,7 +21,7 @@ Edit app/config/app.php and set desired domain
    Username: admin@laracms.new
    Password: JohnDoePass
 
-   
+
 ## Information
 Soon ...
 
