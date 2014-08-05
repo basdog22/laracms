@@ -12,7 +12,7 @@ class ThemesController extends BaseController{
     }
 
     function uninstall($themeid){
-        if($themeid>1){
+        if($themeid>2){
 
             $theme = Themes::find($themeid);
             Event::fire('backend.themes.uninstall', array($theme));
@@ -32,7 +32,7 @@ class ThemesController extends BaseController{
     }
 
     function install($themeid){
-        if($themeid>1){
+        if($themeid>2){
             $theme = Themes::find($themeid);
             Event::fire('backend.themes.install', array($theme));
             $theme->installed = 1;

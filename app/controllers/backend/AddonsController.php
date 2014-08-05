@@ -14,7 +14,7 @@ class AddonsController extends BaseController{
     }
 
     function uninstall($addonid){
-        if($addonid>1){
+        if($addonid>2){
 
             $addon = Addons::find($addonid);
             Event::fire('backend.addons.uninstall', array($addon));
@@ -28,7 +28,7 @@ class AddonsController extends BaseController{
     }
 
     function install($addonid){
-        if($addonid>1){
+        if($addonid>2){
             $addon = Addons::find($addonid);
             Event::fire('backend.addons.install', array($addon));
             $addon->installed = 1;

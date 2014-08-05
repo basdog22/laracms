@@ -6,4 +6,8 @@
 {{ HTML::script('layouts/backend/plugins/bootstrap/bootstrap.min.js') }}
 {{ HTML::script('layouts/backend/plugins/justified-gallery/jquery.justifiedgallery.min.js') }}
 {{ $footeritems }}
-{{ HTML::script('layouts/backend/lara.js') }}
+<script>
+    var lara;
+    lara = {{ json_encode(Config::get('cms'))}};
+</script>
+{{ HTML::script('layouts/backend/lara.js.php') }}

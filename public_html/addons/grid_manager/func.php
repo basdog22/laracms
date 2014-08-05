@@ -42,6 +42,13 @@ Event::listen('backend.addons.saveaddoninfo.grid_manager', function ($addon) {
         $table->text('params');
         $table->integer('sort');
         $table->timestamps();
-
     });
+
+    $grid = new Grids;
+    $grid->route = 'LaraController@showMainpage';
+    $grid->grid_name = 'Default';
+    $grid->grid_title = 'Default';
+    $grid->grid_description = 'Default';
+    $grid->save();
+
 }, 1);

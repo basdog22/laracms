@@ -1,3 +1,4 @@
+<?php header("Content-Type: text/javascript")?>
 $(document).ready(function () {
     $(document).on('click', '.modal-link', function (e) {
         e.preventDefault();
@@ -8,15 +9,12 @@ $(document).ready(function () {
         return false;
     });
 
-
-
     $('#laraModal').on('show.bs.modal', function () {
         var modalBody = $(this).find('.modal-body');
         var modalDialog = $(this).find('.modal-dialog');
         $(this).find('.modal-dialog').css('width', 700);
 
     });
-
 
     $('#laraModal').on('hidden.bs.modal', function () {
         $('#laraModal .modal-body').html('');
@@ -88,13 +86,13 @@ $(document).ready(function () {
 
     var screensaverTimer = setTimeout(function(){
         $("#locked-screen").trigger('click');
-    },300000);
+    },lara.auto_settings.backend.laracms.screensaver * 1);
 
     $(document).on('mousemove','body',function(){
        clearTimeout(screensaverTimer);
         screensaverTimer = setTimeout(function(){
             $("#locked-screen").trigger('click');
-        },300000);
+        },lara.auto_settings.backend.laracms.screensaver * 1);
     });
     LoadSelect2Script(doSelects);
 
@@ -152,7 +150,7 @@ function OpenModalBox(){
         $('#screensaver').removeClass("show");
         var screensaverTimer = setTimeout(function(){
             $("#locked-screen").trigger('click');
-        },300000);
+        },lara.auto_settings.backend.laracms.screensaver * 1);
         return false;
     }
     if(who){
