@@ -1,1 +1,1 @@
-I am a widget
+{{ Widget::show(Lang::get('banners::strings.banners'),bannersToList(Banners::paginate(10))) }}

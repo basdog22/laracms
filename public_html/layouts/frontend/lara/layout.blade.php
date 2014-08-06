@@ -10,13 +10,13 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        {{ HTML::style('layouts/frontend/sample/css/bootstrap.min.css') }}
-        {{ HTML::style('layouts/frontend/sample/css/icomoon-social.css') }}
+        {{ HTML::style('layouts/frontend/lara/css/bootstrap.min.css') }}
+        {{ HTML::style('layouts/frontend/lara/css/icomoon-social.css') }}
         {{ HTML::style('http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800') }}
-        {{ HTML::style('layouts/frontend/sample/css/leaflet.css') }}
-        <!--[if lte IE 8]>{{ HTML::style('layouts/frontend/sample/css/leaflet.ie.css') }}<![endif]-->
-        {{ HTML::style('layouts/frontend/sample/css/main.css') }}
-        {{ HTML::script('layouts/frontend/sample/js/modernizr-2.6.2-respond-1.1.0.min.js') }}
+        {{ HTML::style('layouts/frontend/lara/css/leaflet.css') }}
+        <!--[if lte IE 8]>{{ HTML::style('layouts/frontend/lara/css/leaflet.ie.css') }}<![endif]-->
+        {{ HTML::style('layouts/frontend/lara/css/main.css') }}
+        {{ HTML::script('layouts/frontend/lara/js/modernizr-2.6.2-respond-1.1.0.min.js') }}
 
     </head>
     <body>
@@ -98,14 +98,14 @@
 
         <!-- Javascripts -->
         {{ HTML::script('http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js') }}
-        <script>window.jQuery || document.write('<script src="layouts/frontend/sample/js/jquery-1.9.1.min.js"><\/script>')</script>
-        {{ HTML::script('layouts/frontend/sample/js/bootstrap.min.js') }}
+        <script>window.jQuery || document.write('<script src="layouts/frontend/lara/js/jquery-1.9.1.min.js"><\/script>')</script>
+        {{ HTML::script('layouts/frontend/lara/js/bootstrap.min.js') }}
         {{ HTML::script('http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js') }}
-        {{ HTML::script('layouts/frontend/sample/js/jquery.fitvids.js') }}
-        {{ HTML::script('layouts/frontend/sample/js/jquery.sequence-min.js') }}
-        {{ HTML::script('layouts/frontend/sample/js/jquery.bxslider.js') }}
-        {{ HTML::script('layouts/frontend/sample/js/main-menu.js') }}
-        {{ HTML::script('layouts/frontend/sample/js/template.js') }}
+        {{ HTML::script('layouts/frontend/lara/js/jquery.fitvids.js') }}
+        {{ HTML::script('layouts/frontend/lara/js/jquery.sequence-min.js') }}
+        {{ HTML::script('layouts/frontend/lara/js/jquery.bxslider.js') }}
+        {{ HTML::script('layouts/frontend/lara/js/main-menu.js') }}
+        {{ HTML::script('layouts/frontend/lara/js/template.js') }}
 
 
     </body>

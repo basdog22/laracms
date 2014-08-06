@@ -2358,6 +2358,10 @@ td.beauty-hover {
   }
 }
 
+.move-activ:hover{
+    cursor:move;
+}
+
 .droppable{
     border:1px dashed #ccc;
     padding:20px;
@@ -2377,4 +2381,17 @@ td.beauty-hover {
 .popover-bigger{
     max-width: 700px;
     width: 700px;
+}
+.widget-box{
+    padding:0;
+    margin:10px;
+}
+
+.col-md-4.ms31{
+    width:31.3333%
+}
+
+.col-md-4.ms31 .box-content{
+    height: 250px;
+    overflow: auto;
 }

@@ -44,4 +44,5 @@ return array(
     'main_content'        =>  'Κύριο περιεχόμενο',
     'load_main_content'        =>  'Φόρτωση κυρίως περιεχόμενο',
     'specific_menu'        =>  'Συγκεκριμένο menu',
+    'lara_news'        =>  'Τα νέα μας',
 );

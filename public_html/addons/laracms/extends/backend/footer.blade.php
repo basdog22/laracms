@@ -1,3 +1,4 @@
+{{ HTML::script('layouts/backend/plugins/slimScroll/jquery.slimscroll.min.js') }}
 <script>
     $(document).ready(function(){
         $(document).on('click', '.popup-link', function (e) {
@@ -40,5 +41,20 @@
         });
 
         $(".popup-link").popover();
+
+        $(".ttips").tooltip();
+
+        if(jQuery(".scrollbars").length){
+            jQuery(".scrollbars").each(function(){
+                jQuery(this).slimScroll({
+                    height: jQuery(this).data('height')
+                });
+            });
+        }
+
+
+
+
     });
+
 </script>

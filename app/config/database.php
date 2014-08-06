@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'laradb',
+			'database'  => 'lara',
 			'username'  => 'root',
 			'password'  => 'tinsun789',
 			'charset'   => 'utf8',

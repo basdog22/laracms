@@ -95,6 +95,18 @@ class BaseController extends Controller
 
     }
 
+    public function getContentTypesFlat(){
+        $content = Event::fire('laracms.collect.content.types');
+        $types = array();
+        foreach($content as $k=>$v){
+            foreach($v as $o){
+//                Commoner::debug($o);
+                $types[] = $o;
+            }
+        }
+        return $types;
+    }
+
     public function setLayoutContent($view_path,$data=array()){
         $view = View::make($view_path)->with($data);
 //       Commoner::debug($view);

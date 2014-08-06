@@ -2,7 +2,7 @@
 
 Event::listen('backend.widgets.create', function () {
     return array(
-        //'laramce/extends/backend/widgets'
+        'banners/extends/backend/widgets'
     );
 }, 1);
 
@@ -75,3 +75,15 @@ Event::listen('backend.addons.saveaddoninfo.banners', function ($addon) {
 		
     });
 }, 1);
+
+function bannersToList($banners){
+        ob_start();
+        ?>
+        <ul class="nav nav-stacked">
+            <?php foreach($banners as $item):?>
+                <li class="clearfix"><a href="<?php echo url('backend/editbanner')."/". $item->id ?>"><?php echo $item->title?></a></li>
+            <?php endforeach?>
+        </ul>
+        <?php
+        return ob_get_clean();
+}

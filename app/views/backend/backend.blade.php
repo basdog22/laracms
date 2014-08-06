@@ -1,1 +1,1 @@
-{{$widgets}}
+<div class="sortable">{{$widgets}}</div>

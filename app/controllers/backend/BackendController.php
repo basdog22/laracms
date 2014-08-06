@@ -13,6 +13,19 @@ class BackendController extends BaseController {
         Event::fire('backend.dashboard.after_load');
 	}
 
+    public function search(){
+        $content = $this->getContentTypesFlat();
+
+        $results = array();
+        foreach($content as $type){
+            $model = $type['model'];
+            $results[$type['type']]['content'] = $type;
+            $results[$type['type']]['data'] = $model::where("title",'LIKE',"%".Input::get('search')."%")->paginate(Config::get('cms.auto_settings.backend.laracms.paging'));
+        }
+//        Commoner::debug($results);
+        $this->layout->content = View::make('backend/results')->withResults($results);
+    }
+
     public function help(){
         if (Request::ajax()){
             return View::make('backend/help');

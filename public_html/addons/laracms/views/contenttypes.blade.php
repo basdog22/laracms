@@ -12,7 +12,7 @@
         <div id="content_{{$type['type']}}">
             <ul class="nav nav-stacked">
                 @foreach($type['model']::all() as $pages)
-                <li><a href="#" class="close-popup" data-appendto="url" data-href="/{{$type['slug']}}/{{$pages->page_slug}}">{{$pages->title}}</a></li>
+                <li><a href="#" class="close-popup" data-appendto="url" data-href="/{{$type['slug']}}/{{$pages->slug}}">{{$pages->title}}</a></li>
                 @endforeach
             </ul>
 

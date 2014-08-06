@@ -137,3 +137,27 @@ Event::listen('content.blocks.collect', function () {
     ));
     Config::set('cms.contentblocks', $blocks);
 }, 1);
+
+function feedToList($items){
+    ob_start();
+    ?>
+    <ul class="nav nav-stacked">
+        <?php foreach($items as $item):?>
+            <li class="clearfix"><a target="_blank" href="<?php echo $item->get_permalink() ?>"><?php echo $item->get_title()?></a></li>
+        <?php endforeach?>
+    </ul>
+    <?php
+    return ob_get_clean();
+}
+
+function pagesToList($pages){
+    ob_start();
+    ?>
+    <ul class="nav nav-stacked">
+        <?php foreach($pages as $item):?>
+            <li class="clearfix"><a href="<?php echo url('backend/editpage')."/". $item->id ?>"><?php echo $item->title?></a></li>
+        <?php endforeach?>
+    </ul>
+    <?php
+    return ob_get_clean();
+}

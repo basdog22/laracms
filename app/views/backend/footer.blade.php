@@ -10,4 +10,4 @@
     var lara;
     lara = {{ json_encode(Config::get('cms'))}};
 </script>
-{{ HTML::script('layouts/backend/lara.js.php') }}
+{{ HTML::script('layouts/backend/lara.js') }}

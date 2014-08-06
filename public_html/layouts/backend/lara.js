@@ -1,4 +1,3 @@
-<?php header("Content-Type: text/javascript")?>
 $(document).ready(function () {
     $(document).on('click', '.modal-link', function (e) {
         e.preventDefault();
@@ -104,8 +103,24 @@ $(document).ready(function () {
     });
 
 
+    $( ".sortable" ).sortable({
+        revert: true,
+        cursor: "move",
+        forceHelperSize: true,
+        forcePlaceholderSize: true,
+        handle: ".handle",
+        opacity: 0.8,
+        zIndex: 9999,
+        update:function(event,ui){
+            //line below gives the ids of elements, you can make ajax call here to save it to the database
+            //console.log($(this).sortable('toArray'));
+            var order = $(this).sortable("toArray").join(',');
+            $.cookie("widgets_order",order, {expires: 365, path: window.location.pathname});
+        }
+    });
+    $( ".sortable" ).disableSelection();
 
-
+    reorder($.cookie("widgets_order").split(","),$(".sortable"));
     //assign hotkeys
     Mousetrap.bind(['command+l', 'ctrl+l'], function(e) {
         if($.cookie('locked')==1){
@@ -137,7 +152,11 @@ $(document).ready(function () {
     });
 });
 
-
+function reorder(orderArray, elementContainer){
+    $.each(orderArray, function(key, val){
+        elementContainer.append($("#"+val));
+    });
+}
 
 function lockScreen(){
 

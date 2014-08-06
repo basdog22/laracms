@@ -60,5 +60,6 @@ return array(
     'navigate_themes' => 'Πλοήγηση στα θέματα',
     'navigate_addons' => 'Πλοήγηση στα πρόσθετα',
     'default' => 'Προεπιλογή',
+    'search_results' => 'Αποτελέσματα αναζήτησης',
 
 );

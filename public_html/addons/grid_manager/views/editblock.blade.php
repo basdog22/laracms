@@ -8,7 +8,11 @@
         {{ Form::label($param['label']) }}
         @if($param['type']=='select')
         @if(isset($param['attr']))
+        @if(isset($params[$param['name']]))
         {{ Form::$param['type']($param['name']."[]",$param['options'],explode(",",implode(",",$params[$param['name']])),array($param['attr'])) }}
+        @else
+        {{ Form::$param['type']($param['name']."[]",$param['options'],array(),array($param['attr'])) }}
+        @endif
         @else
         {{ Form::$param['type']($param['name'],$param['options']),$params[$param['name']] }}
         @endif

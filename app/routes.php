@@ -13,6 +13,7 @@
 Route::group(array('before' => 'auth','as'=>'backend'), function()
 {
     Route::get('backend/','BackendController@dashboard');
+
     Route::get('backend/help','BackendController@help');
     Route::get('backend/dashboard','BackendController@dashboard');
     Route::get('addons/manage','AddonsController@manage');
@@ -31,6 +32,7 @@ Route::group(array('before' => 'auth','as'=>'backend'), function()
     Route::get('users/new','UsersController@newuser');
     Route::get('users/edituser/{userid}','UsersController@edituser');
 
+    Route::post('backend/search','BackendController@search');
     Route::post('users/adduser','UsersController@adduser');
     Route::post('users/saveuser','UsersController@saveuser');
 });

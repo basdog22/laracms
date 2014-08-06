@@ -60,8 +60,9 @@ class GridController extends BaseController{
         $block = Blocks::find($blockid);
         $contentBlocks = Block::getContentBlocks();
         $contentBlock = $contentBlocks[$block->block_name];
-        $params = unserialize($block->params);
 
+        $params = unserialize($block->params);
+        $params = (is_array($params))?$params:array();
         if(Request::ajax()){
             return View::make('grid_manager/views/editblock')->with('block',$block)->with('contentblock',$contentBlock)->with('params',$params);
         }else{

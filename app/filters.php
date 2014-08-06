@@ -20,7 +20,7 @@ App::before(function ($request) {
         $dbCode = trim($dbCode, '[');
 
         // codes specific to MySQL
-        switch ($dbCode) {
+        switch ($dbCode){
             case 1049:
                 //not installed or error in config
                 $installer = new Installer;
