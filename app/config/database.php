@@ -70,7 +70,7 @@ return array(
 			'username' => 'forge',
 			'password' => '',
 			'charset'  => 'utf8',
-			'prefix'   => '',
+			'prefix'   => 'lara_',
 			'schema'   => 'public',
 		),
 
@@ -80,7 +80,7 @@ return array(
 			'database' => 'database',
 			'username' => 'root',
 			'password' => '',
-			'prefix'   => '',
+			'prefix'   => 'lara_',
 		),
 
 	),

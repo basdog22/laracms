@@ -31,8 +31,7 @@ Event::listen('laracms.collect.content.types', function () {
 }, 1);
 
 Event::listen('banners.slider.banner', function ($params) {
-    $ids = implode(",",$params['bannerid']);
-    return Banners::whereRaw("id IN ({$ids})")->get();
+    return Banners::cachedin($params['bannerid']);
 }, 1);
 
 Event::listen('content.blocks.collect', function () {

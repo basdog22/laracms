@@ -16,11 +16,13 @@ class Installer{
             $this->populateDb();
             return Redirect::to('/')->withMessage('LaraCMS Installed!');
         }else{
-           return 'wrong hash';
+           return View::make('installation/install')->withMessage('The hash you provided is wrong. Please check your configuration and try again');
         }
     }
 
     private function populateDb(){
+        $config = require("/../app/config/cms.php");
+        extract($config);
         //addons
         //laracms
         $addon = new Addons;
@@ -74,12 +76,22 @@ class Installer{
         $theme->active = 1;
         $theme->save();
         //users
+
+
         $user = new User;
         $user->firstname = 'John';
         $user->lastname = 'Doe';
-        $user->email = 'admin@laracms.new';
-        $user->password = Hash::make('JohnDoePass');
+        $user->email = $config['admin_email'];
+        $pass = Commoner::generatePass('administrator',$config['admin_email']);
+        $user->password = Hash::make($pass);
         $user->save();
+
+        $config['pass'] = $pass;
+        //send the login credentials to the email
+        Mail::send('emails.admin_credentials', $config, function($message) use ($user)
+        {
+            $message->to($user->email, $user->name)->subject('The credentials for your site at '.$_SERVER['SERVER_NAME']);
+        });
 
     }
 

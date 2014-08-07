@@ -141,7 +141,7 @@ class GridController extends BaseController{
         $routeCollection = Route::getRoutes();
         $availRoutes = array();
         foreach($routeCollection as $route){
-            if($route->getName()!='backend' && $route->getMethods()[0]=='GET' && !preg_match("#missingMethod#",$route->getActionName())){
+            if($route->getName()!='backend' && $route->getMethods()[0]=='GET' && !preg_match("#UploadsController#",$route->getActionName()) && !preg_match("#missingMethod#",$route->getActionName())){
                 $availRoutes[$route->getActionName()] = $route->getActionName();
             }
         }

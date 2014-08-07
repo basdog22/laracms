@@ -12,28 +12,7 @@
 */
 
 App::before(function ($request) {
-
-    App::error(function (\PDOException $e, $code) {
-        Log::error('FATAL DATABASE ERROR: ' . $code . ' = ' . $e->getMessage());
-        $message = explode(' ', $e->getMessage());
-        $dbCode = rtrim($message[1], ']');
-        $dbCode = trim($dbCode, '[');
-
-        // codes specific to MySQL
-        switch ($dbCode){
-            case 1049:
-                //not installed or error in config
-                $installer = new Installer;
-                return $installer->doInstall($_GET['hash'],$message);
-                break;
-            case 2002:
-                return View::make('installation/dbdown')->withMessage($message);
-                break;
-            default:
-                return View::make('installation/unknown')->withMessage($message);
-                break;
-        }
-    }); // end of App::error
+    Commoner::observe();
     //change the hash so no malware uses it
     Config::set('cms.installation_hash','');
     $addonsNotInstalled = $addonsInstalled = $themesNotInstalled = $themesInstalled = array();

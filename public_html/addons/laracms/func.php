@@ -58,38 +58,41 @@ Event::listen('laracms.pages.last', function ($params) {
 }, 1);
 
 Event::listen('laracms.menus.specific', function ($params) {
-    $menu = Menus::find($params['menuid']);
-    $it = $menu->menuitems;
-    $items = array();
-    $content = Event::fire('laracms.collect.content.types');
+    $specific = Cache::remember('laracms_specific_menu_'.$params['menuid'], 60, function () use($params){
+        $menu = Menus::find($params['menuid']);
+        $it = $menu->menuitems;
+        $items = array();
+        $content = Event::fire('laracms.collect.content.types');
 
-    foreach ($it as $k => $ti) {
-        $items[$k] = $ti;
-        $subs = array();
-        if ($ti->model != '') {
-            $model = $ti->model;
-            foreach ($content as $ptype) {
-                foreach ($ptype as $ctype) {
+        foreach ($it as $k => $ti) {
+            $items[$k] = $ti;
+            $subs = array();
+            if ($ti->model != '') {
+                $model = $ti->model;
+                foreach ($content as $ptype) {
+                    foreach ($ptype as $ctype) {
 
-                    if ($model == $ctype['model']) {
-                        $slug = $ctype['slug'];
+                        if ($model == $ctype['model']) {
+                            $slug = $ctype['slug'];
+                        }
                     }
                 }
+                $subitems = $model::all();
+                foreach ($subitems as $subitem) {
+                    $subitem->slug = $slug ."/". $subitem->slug;
+                    $subs[] = $subitem;
+                }
+                $items[$k]->subs = $subs;
             }
-            $subitems = $model::all();
-            foreach ($subitems as $subitem) {
-                $subitem->slug = $slug ."/". $subitem->slug;
-                $subs[] = $subitem;
-            }
-            $items[$k]->subs = $subs;
+
         }
 
-    }
-
-    return array(
-        'menu' => $menu,
-        'items' => $items
-    );
+        return array(
+            'menu' => $menu,
+            'items' => $items
+        );
+    });
+    return $specific;
 }, 1);
 
 

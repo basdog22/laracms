@@ -5,6 +5,8 @@ return array(
 	'public_dir'    =>  'public_html',
     'title'         =>  'LaraCMS - Powered by Laravel',
     'brand'         =>  'LaraCMS',
-    'installation_hash'=>   'AVXv3KPW21a8vmuoDO2IF9hAIgGm'
+    'installation_hash'=>   'AVXv3KPW21a8vmuoDO2IF9hAIgGm',
+    'admin_email'   =>  'basdog22@gmail.com',
+    'laradebug'   =>  true
 
 );
