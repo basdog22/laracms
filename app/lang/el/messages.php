@@ -11,4 +11,5 @@ return array(
     'theme_uninstalled'  =>  'Το θέμα απεγκαταστάθηκε',
     'theme_installed'  =>  'Το θέμα εγκαταστάθηκε',
     'user_saved'        =>  'Ο χρήστης αποθηκεύτηκε',
+    'lang_is_current'        =>  'Η γλώσσα τώρα είναι :name',
 );

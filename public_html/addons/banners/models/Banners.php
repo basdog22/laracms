@@ -1,6 +1,6 @@
 <?php
 
-class Banners extends Eloquent
+class Banners extends Lara
 {
 
     protected $table = 'banners';

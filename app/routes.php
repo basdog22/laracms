@@ -16,6 +16,13 @@ Route::group(array('before' => 'auth','as'=>'backend'), function()
 
     Route::get('backend/help','BackendController@help');
     Route::get('backend/dashboard','BackendController@dashboard');
+
+    Route::get('languages/manage','LanguagesController@manage');
+    Route::get('languages/toggle/{langid}','LanguagesController@toggle');
+    Route::get('languages/new','LanguagesController@newlang');
+    Route::get('languages/setcurrent/{langid}','LanguagesController@setcurrent');
+    Route::get('languages/del/{langid}','LanguagesController@dellang');
+
     Route::get('addons/manage','AddonsController@manage');
     Route::get('addons/uninstall/{addonid}','AddonsController@uninstall');
     Route::get('addons/install/{addonid}','AddonsController@install');
@@ -35,6 +42,7 @@ Route::group(array('before' => 'auth','as'=>'backend'), function()
     Route::post('backend/search','BackendController@search');
     Route::post('users/adduser','UsersController@adduser');
     Route::post('users/saveuser','UsersController@saveuser');
+    Route::post('languages/addlang','LanguagesController@addlang');
 });
 
 

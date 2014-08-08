@@ -14,7 +14,7 @@
 App::before(function ($request) {
     Commoner::observe();
     //change the hash so no malware uses it
-    Config::set('cms.installation_hash','');
+    Config::set('cms.installation_hash', '');
     $addonsNotInstalled = $addonsInstalled = $themesNotInstalled = $themesInstalled = array();
     $addons = Addons::all();
     $themes = Themes::all();
@@ -75,6 +75,18 @@ App::before(function ($request) {
     Config::set("cms.addons.data", $addons);
     Config::set("cms.addons.installed", $addonsInstalled);
     Config::set("cms.addons.not_installed", $addonsNotInstalled);
+
+    if(Session::has('currlang')){
+        Config::set('cms.currlang',Session::get('currlang'));
+    }else{
+        $lang = Languages::where("code","=",Config::get('cms.currlang'))->first();
+        Config::set('cms.currlang',array(
+            'code'  =>  $lang->code,
+            'title' =>  $lang->title,
+            'image' =>  $lang->image
+        ));
+    }
+
 });
 
 

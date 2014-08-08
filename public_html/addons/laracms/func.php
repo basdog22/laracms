@@ -1,6 +1,5 @@
 <?php
 
-
 Event::listen('laracms.collect.content.types', function () {
     return array(
         array(

@@ -1,6 +1,6 @@
 <?php
 
-class Menus extends Eloquent
+class Menus extends Lara
 {
 
     protected $table='menus';

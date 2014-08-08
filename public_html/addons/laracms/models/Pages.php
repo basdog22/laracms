@@ -1,6 +1,6 @@
 <?php
 
-class Pages extends Eloquent
+class Pages extends Lara
 {
 
     protected $table='pages';
@@ -9,5 +9,7 @@ class Pages extends Eloquent
         $page = Pages::where('slug','=',$slug)->first();
         return $page;
     }
+
+
 
 }

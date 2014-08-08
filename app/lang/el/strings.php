@@ -44,6 +44,7 @@ return array(
     'messages'        =>  'Μηνύματα',
     'tasks'        =>  'Tasks',
     'settings'        =>  'Ρυθμίσεις',
+    'languages'        =>  'Γλώσσες',
     'tools'        =>  'Εργαλεία',
     'title'        =>  'Τίτλος',
     'status'        =>  'Κατάσταση',

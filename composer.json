@@ -5,7 +5,8 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-        "simplepie/simplepie": "dev-master"
+        "simplepie/simplepie": "dev-master",
+        "dimsav/laravel-translatable": "4.2.*"
 	},
 	"autoload": {
 		"classmap": [

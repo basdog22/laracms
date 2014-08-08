@@ -10,7 +10,7 @@ Route::group(array('prefix' => 'backend','as'=>'backend'), function()
     Route::get('newmenu', 'LaraBackendController@newmenu');
 
     Route::get('contenttype', 'LaraBackendController@contentypes');
-    Route::get('imggallery', 'LaraBackendController@imggallery');
+    Route::get('imggallery/{path?}', 'LaraBackendController@imggallery');
 
     Route::get('newmenuitem/{menuid}', 'LaraBackendController@newmenuitem');
     Route::get('menuitems/{menuid}','LaraBackendController@menuitems');

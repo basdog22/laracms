@@ -90,8 +90,19 @@ class LaraBackendController extends BaseController {
         }
     }
 
-    public function imggallery(){
-        $content = scandir(public_path()."/uploads/");
+    public function imggallery($path=false){
+        if($path){
+            switch($path){
+                case "flags":
+                    $content = scandir(public_path()."/uploads/flags/");
+                    $path = 'uploads/flags/';
+                    break;
+            }
+        }else{
+            $content = scandir(public_path()."/uploads/");
+            $path = 'uploads/';
+        }
+
         $files = array();
         foreach($content as $item){
             if($item!='.' && $item!='..'  && $item!='.quarantine'  && $item!='.tmb'){
@@ -100,7 +111,7 @@ class LaraBackendController extends BaseController {
                 $ext = strtolower($ext);
 
                 if(in_array($ext,array('gif','png','jpg','jpeg','bmp'))){
-                    $files[] = $item;
+                    $files[] = $path.$item;
                 }
             }
 
@@ -222,6 +233,7 @@ class LaraBackendController extends BaseController {
         $page->subtitle = Input::get('subtitle');
         $page->content = Input::get('content');
         $page->status = Input::get('status');
+
         $page->save();
 
         if(Input::get('saveclose')){

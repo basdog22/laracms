@@ -26,6 +26,12 @@
                                 </a>
                             </li>
                             <li class="hidden-xs">
+                                <a id="addonslink" href="{{ url('languages/manage') }}" >
+                                    <i class="fa fa-globe"></i>
+                                    {{ Lang::get('strings.languages') }}
+                                </a>
+                            </li>
+                            <li class="hidden-xs">
                                 <a id="themeslink" class="ajax-link" href="{{ url('themes/manage') }}">
                                     <i class="fa fa-desktop"></i>
                                     {{ Lang::get('strings.themes') }}
@@ -63,6 +69,29 @@
                                             <span class="hidden-sm text">Logout</span>
                                         </a>
                                     </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle account" data-toggle="dropdown">
+                                    <div class="avatar">
+                                        <img src="{{ Config::get('cms.currlang.image') }}" class="img-rounded" alt="{{ Config::get('cms.currlang.title') }}" />
+                                    </div>
+                                    <i class="fa fa-angle-down pull-right"></i>
+                                    <div class="user-mini pull-right">
+                                        <span class="welcome">{{ Config::get('cms.currlang.title') }},</span>
+                                        <span>{{ Config::get('cms.currlang.code') }}</span>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    @foreach(Languages::all() as $lang)
+                                    <li>
+                                        <a  href="{{ url('languages/setcurrent/'.$lang->id) }}">
+                                            <i class="fa fa-flag"></i>
+                                            <span class="hidden-sm text">{{ $lang->title }}</span>
+                                        </a>
+                                    </li>
+
+                                    @endforeach
                                 </ul>
                             </li>
                             <li class="hidden-xs">

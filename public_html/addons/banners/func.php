@@ -64,6 +64,7 @@ Event::listen('content.blocks.collect', function () {
 
 
 Event::listen('backend.addons.saveaddoninfo.banners', function ($addon) {
+
     Schema::create('banners', function($table)
     {
         $table->increments('id');
@@ -73,6 +74,7 @@ Event::listen('backend.addons.saveaddoninfo.banners', function ($addon) {
         $table->timestamps();
 		
     });
+
 }, 1);
 
 function bannersToList($banners){

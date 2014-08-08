@@ -5,7 +5,7 @@
         @foreach($content as $type)
         <div class="dummy">
             <a href="#" class="close-popup" data-appendto="image_url" data-href="/uploads/{{ $type }}">
-                <img class="col-md-2 img-responsive" src="/uploads/{{ $type }}" />
+                <img class="col-md-2 img-responsive" src="/{{ $type }}" />
             </a>
         </div>
         @endforeach

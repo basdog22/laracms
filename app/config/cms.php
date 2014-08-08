@@ -7,6 +7,7 @@ return array(
     'brand'         =>  'LaraCMS',
     'installation_hash'=>   'AVXv3KPW21a8vmuoDO2IF9hAIgGm',
     'admin_email'   =>  'basdog22@gmail.com',
-    'laradebug'   =>  true
+    'laradebug'   =>  true,
+    'currlang'   =>  'en_US',
 
 );
