@@ -78,6 +78,7 @@ class Commoner{
                     return Response::view('common.errors.404', array(), 403);
                 case 500:
                     $message = explode(' ', $e->getMessage());
+
                     $dbCode = rtrim($message[1], ']');
                     $dbCode = trim($dbCode, '[');
                     // codes specific to MySQL

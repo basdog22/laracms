@@ -93,6 +93,19 @@ class Installer{
             $message->to($user->email, $user->name)->subject('The credentials for your site at '.$_SERVER['SERVER_NAME']);
         });
 
+	    //add the languages
+	    $lang = new Languages;
+	    $lang->code = 'en_US';
+	    $lang->title = 'English';
+	    $lang->image = "/uploads/flags/Englang.png";
+	    $lang->active = 1;
+	    $lang->save();
+	    $lang = new Languages;
+	    $lang->code = 'el_GR';
+	    $lang->title = 'Greek';
+	    $lang->image = "/uploads/flags/Greece.png";
+	    $lang->active = 1;
+	    $lang->save();
     }
 
     private function createDb($database){
