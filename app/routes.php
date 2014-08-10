@@ -10,6 +10,9 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+
+Route::when('*', 'csrf', ['post', 'put', 'patch', 'delete']);
+
 Route::group(array('before' => 'auth','as'=>'backend'), function()
 {
     Route::get('backend/','BackendController@dashboard');
