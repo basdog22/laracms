@@ -3,7 +3,7 @@
 	"description": "The LaraCMS.",
 	"keywords": ["cms", "laravel","laracms"],
 	"license": "MIT",
-    "version": "1.0.0-dev",
+    "type": "project",
 	"require": {
 		"basdog22/laracms": "@dev"
 	},
