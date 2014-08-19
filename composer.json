@@ -17,7 +17,7 @@
     "require": {
         "basdog22/laracms": "dev-master",
         "laravel/framework": "4.2.*",
-        "simplepie/simplepie": "dev-master",
+        "simplepie/simplepie": "dev-master"
     },
     "autoload": {
         "classmap": [
