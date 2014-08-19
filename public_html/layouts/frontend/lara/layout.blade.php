@@ -6,8 +6,8 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>{{ Config::get('cms.title') }}</title>
-        <meta name="description" content="">
+        <title>{{ Commoner::title() }}</title>
+        <meta name="description" content="{{ Commoner::description() }}">
         <meta name="viewport" content="width=device-width">
 
         {{ HTML::style('layouts/frontend/lara/css/bootstrap.min.css') }}

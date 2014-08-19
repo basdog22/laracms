@@ -7,6 +7,7 @@ class Pages extends Lara
 
     static function page($slug){
         $page = Pages::where('slug','=',$slug)->first();
+        $page = Pages::find($page->id);
         return $page;
     }
 

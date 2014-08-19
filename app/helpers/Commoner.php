@@ -68,6 +68,27 @@ class Commoner{
         });
     }
 
+    static function title(){
+        $seo = Config::get('cms.seo');
+        if(!is_null($seo)){
+            return $seo->title;
+        }
+    }
+
+    static function description(){
+        $seo = Config::get('cms.seo');
+        if(!is_null($seo)){
+            return $seo->description;
+        }
+    }
+
+    static function keywords(){
+        $seo = Config::get('cms.seo');
+        if(!is_null($seo)){
+            return $seo->keywords;
+        }
+    }
+
     static function observe(){
         App::missing(function($exception)
         {

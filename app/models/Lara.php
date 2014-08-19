@@ -38,6 +38,8 @@ class Lara extends Eloquent
         return $this->morphMany('Seo', 'seoble');
     }
 
+
+
     public static function paginate($perPage = null, $columns = array('*')){
 
         $instance = new static;
@@ -59,6 +61,10 @@ class Lara extends Eloquent
             $translation = Translations::find($obj->table . "_" . $obj->id . "_" . strtolower(Config::get('cms.currlang.code')));
 
             $obj->setRawAttributes(json_decode($translation->translation, 1));
+            $seo = $obj->seo()->first();
+            if(!is_null($seo)){
+                Config::set('cms.seo',$seo);
+            }
         }
         return $obj;
     }
@@ -90,8 +96,11 @@ class Lara extends Eloquent
             $prop->setValue($obj,$col);
         }else{
             $translation = Translations::find($obj->table . "_" . $obj->id . "_" . strtolower(Config::get('cms.currlang.code')));
-
             $obj->setRawAttributes(json_decode($translation->translation, 1));
+            $seo = $obj->seo()->first();
+            if(!is_null($seo)){
+                Config::set('cms.seo',$seo);
+            }
         }
 //
         return $obj;
