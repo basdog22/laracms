@@ -7,6 +7,20 @@
 	"require": {
 		"basdog22/laracms": "@dev"
 	},
+    "authors": [
+        {
+            "name": "basdog22",
+            "email": "basdog22@gmail.com",
+            "homepage": "http://www.bonweb.gr",
+            "role": "Developer"
+        }
+    ],
+    "repositories": [
+        {
+            "type":"vcs",
+            "url":"https://github.com/basdog22/laracms/laracms.git"
+        }
+    ],
 	"autoload": {
 		"classmap": [
 			"app/commands",
