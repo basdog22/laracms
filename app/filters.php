@@ -12,7 +12,7 @@
 */
 
 App::before(function ($request) {
-//    Commoner::observe();
+    Commoner::observe();
     //change the hash so no malware uses it
     Config::set('cms.installation_hash', '');
     $addonsNotInstalled = $addonsInstalled = $themesNotInstalled = $themesInstalled = array();
