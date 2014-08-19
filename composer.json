@@ -4,9 +4,7 @@
     "keywords": ["cms", "laravel","laracms"],
     "license": "MIT",
     "type": "project",
-    "require": {
-        "basdog22/laracms": "dev-master"
-    },
+
     "authors": [
         {
             "name": "basdog22",
@@ -17,10 +15,13 @@
     ],
     "repositories": [
         {
-            "type":"vcs",
+            "type":"git",
             "url":"https://github.com/basdog22/laracms/"
         }
     ],
+    "require": {
+        "basdog22/laracms": "dev-master"
+    },
     "autoload": {
         "classmap": [
             "app/commands",
