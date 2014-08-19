@@ -90,6 +90,59 @@ class LaraBackendController extends BaseController {
         }
     }
 
+    public function seo(){
+        $content = $this->getContentTypesFlat();
+
+        $results = array();
+        foreach($content as $type){
+            $model = $type['model'];
+            $results[$type['type']]['content'] = $type;
+            $results[$type['type']]['data'] = $model::paginate(Config::get('cms.auto_settings.backend.laracms.paging'));
+        }
+//        Commoner::debug($results);
+        $this->layout->content = View::make('laracms/views/seo')->withResults($results);
+    }
+
+    public function editseo($model,$contentid){
+        $item = $model::find($contentid);
+        $seo = $item->seo()->first();
+        if (Request::ajax()){
+            if(is_null($seo)){
+               return View::make('laracms/views/addseo')->with('item',$item)->with('model',$model);
+            }else{
+               return View::make('laracms/views/editseo')->with('item',$item)->with('seo',$seo)->with('model',$model);
+            }
+        }else{
+            if(is_null($seo)){
+                $this->layout->content = View::make('laracms/views/addseo')->with('item',$item)->with('model',$model);
+            }else{
+                $this->layout->content = View::make('laracms/views/editseo')->with('item',$item)->with('seo',$seo)->with('model',$model);
+            }
+        }
+
+    }
+
+    public function addseo(){
+        $model = Input::get('model');
+        $itemid = Input::get('itemid');
+
+        $item = $model::find($itemid);
+
+        $seo = new Seo;
+        $seo->updateFromInput();
+        $item->seo()->save($seo);
+
+        return Redirect::to('backend/seo')->withMessage($this->notifyView(Lang::get('laracms::messages.seo_added'),'success'));
+    }
+
+    public function saveseo(){
+        $seoid = Input::get('seoid');
+        $seo = Seo::find($seoid);
+        $seo->updateFromInput();
+        $seo->save();
+        return Redirect::to('backend/seo')->withMessage($this->notifyView(Lang::get('laracms::messages.seo_edited'),'success'));
+    }
+
     public function imggallery($path=false){
         if($path){
             switch($path){

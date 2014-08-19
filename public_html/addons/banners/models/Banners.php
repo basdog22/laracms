@@ -17,9 +17,10 @@ class Banners extends Lara
 
     static function cachedIn($ids = array())
     {
-        $ids = implode(",",$ids);
-        $banners = Cache::remember('banners', 60, function () use($ids){
-            return Banners::whereRaw("id IN ({$ids})")->get();
+//        $ids = implode(",",$ids);
+        $banners = Cache::remember('banners_'.Config::get('cms.currlang.code'), 60, function () use($ids){
+//            return Banners::whereRaw("id IN ({$ids})")->get();
+            return Banners::find($ids);
         });
         return $banners;
 

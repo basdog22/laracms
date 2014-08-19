@@ -40,6 +40,6 @@ class LaramceController extends BaseController{
         $settings->setting_value = implode(" ",Input::get('plugins'));
         $settings->autoload = 1;
         $settings->save();
-        return Redirect::to('laramce/settings')->withMessage($this->notifyView(Lang::get('messages.settings_saved'),'success'));
+        return Redirect::to('backend/laramce')->withMessage($this->notifyView(Lang::get('messages.settings_saved'),'success'));
     }
 }

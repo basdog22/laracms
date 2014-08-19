@@ -5,7 +5,12 @@ class Block{
 
 
     static  function show($position){
-        $route = Route::getCurrentRoute()->getActionName();
+        $route = Route::getCurrentRoute();
+        if(!is_null($route)){
+            $route =  $route->getActionName();
+        }
+
+
         //get the location for this route
         $grid = Grids::where('route','=',$route)->first();
         if(!isset($grid->id)){

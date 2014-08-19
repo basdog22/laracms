@@ -69,13 +69,18 @@ class Commoner{
     }
 
     static function observe(){
+        App::missing(function($exception)
+        {
+            return View::make('common.errors.404', array(), 404);
+        });
+
         App::error(function ($e, $code) {
             switch($code){
                 case 403:
                     Commoner::informAdmin(array('text'=>$e->getMessage()));
                     return Response::view('common.errors.403', array(), 403);
                 case 404:
-                    return Response::view('common.errors.404', array(), 403);
+                    return Response::view('common.errors.404', array(), 404);
                 case 500:
                     $message = explode(' ', $e->getMessage());
 

@@ -25,7 +25,9 @@ class LaraController extends BaseController {
 
     function showpage($slug){
         $page = Pages::page($slug);
-
+        if(is_null($page)){
+            App::abort(404);
+        }
         $this->setLayoutContent('laracms/views/pages/page',array('page'=>$page));
     }
 

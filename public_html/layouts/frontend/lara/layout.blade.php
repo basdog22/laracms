@@ -51,6 +51,7 @@
         <div class="section">
 	    	<div class="container">
 				<div class="row">
+                    @yield('content')
                     {{ Block::show('widgets') }}
 				</div>
 			</div>

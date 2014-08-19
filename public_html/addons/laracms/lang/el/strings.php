@@ -47,4 +47,10 @@ return array(
     'lara_news'        =>  'Τα νέα μας',
     'published'        =>  'Δημοσιευμένο',
     'draft'        =>  'Πρόχειρο',
+    'seo'        =>  'SEO',
+    'seo_title'        =>  'SEO Τίτλος',
+    'seo_description'        =>  'Meta Description',
+    'seo_keywords'        =>  'Meta Keywords',
+    'add_seo'        =>  'Προσθήκη SEO στο αντικείμενο',
+    'edit_seo'        =>  'Επεξεργασία SEO',
 );

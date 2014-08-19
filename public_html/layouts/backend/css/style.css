@@ -269,14 +269,16 @@ a.show-sidebar:hover {
   background: #CEA9A9;
 }
 .avatar {
-  width: 40px;
+  width: 35px;
   float: left;
   margin-right: 5px;
+  padding:5px;
 }
 .avatar > img {
-  width:40px;
-  height:40px;
+  width:26px;
+  height:26px;
   border: 1px solid #F8F8F8;
+
 }
 .user-mini > span {
   display: block;
@@ -2394,4 +2396,26 @@ td.beauty-hover {
 .col-md-4.ms31 .box-content{
     height: 250px;
     overflow: auto;
+}
+
+.visible-lm,
+tr.visible-lm,
+th.visible-lm,
+td.visible-lm {
+    display: none !important;
+}
+@media (min-width: 1401px) {
+    .visible-lm {
+        display: block !important;
+    }
+    table.visible-lm {
+        display: table;
+    }
+    tr.visible-lm {
+        display: table-row !important;
+    }
+    th.visible-lm,
+    td.visible-lm {
+        display: table-cell !important;
+    }
 }

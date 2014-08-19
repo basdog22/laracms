@@ -33,6 +33,36 @@ class Lara extends Eloquent
         return;
     }
 
+    public function seo()
+    {
+        return $this->morphMany('Seo', 'seoble');
+    }
+
+    public static function paginate($perPage = null, $columns = array('*')){
+
+        $instance = new static;
+        $obj = $instance->newQuery()->paginate($perPage,$columns);
+        $prop = new ReflectionProperty(get_class($obj), 'items');
+        $col = array();
+        if($prop->name){
+            $prop->setAccessible(1);
+
+            foreach($prop->getValue($obj) as $k=>$object){
+                $translation = Translations::find($object->table . "_" . $object->id . "_" . strtolower(Config::get('cms.currlang.code')));
+
+                $object->setRawAttributes(json_decode($translation->translation, 1));
+
+                $col[] = $object;
+            }
+            $prop->setValue($obj,$col);
+        }else{
+            $translation = Translations::find($obj->table . "_" . $obj->id . "_" . strtolower(Config::get('cms.currlang.code')));
+
+            $obj->setRawAttributes(json_decode($translation->translation, 1));
+        }
+        return $obj;
+    }
+
     public static function find($id, $columns = array('*'))
     {
         if (is_array($id) && empty($id)) return new Collection;
@@ -41,12 +71,29 @@ class Lara extends Eloquent
 
         $obj = $instance->newQuery()->find($id, $columns);
 
-//        if ($lang->code != Config::get('cms.currlang.code')) {
+        if(is_array($id)){
+            $prop = new ReflectionProperty(get_class($obj), 'items');
+        }
+
+
+        $col = array();
+        if(isset($prop->name)){
+            $prop->setAccessible(1);
+
+            foreach($prop->getValue($obj) as $k=>$object){
+                $translation = Translations::find($object->table . "_" . $object->id . "_" . strtolower(Config::get('cms.currlang.code')));
+
+                $object->setRawAttributes(json_decode($translation->translation, 1));
+
+                $col[] = $object;
+            }
+            $prop->setValue($obj,$col);
+        }else{
             $translation = Translations::find($obj->table . "_" . $obj->id . "_" . strtolower(Config::get('cms.currlang.code')));
 
             $obj->setRawAttributes(json_decode($translation->translation, 1));
-//        }
-//        Commoner::debug($obj->table . "_" . $obj->id . "_" . strtolower(Config::get('cms.currlang.code')),$translation);
+        }
+//
         return $obj;
     }
 

@@ -5767,6 +5767,27 @@ td.visible-lg {
     display: table-cell !important;
   }
 }
+.visible-lm,
+tr.visible-lm,
+th.visible-lm,
+td.visible-lm {
+    display: none !important;
+}
+@media (min-width: 1400px) {
+    .visible-lm {
+        display: block !important;
+    }
+    table.visible-lm {
+        display: table;
+    }
+    tr.visible-lm {
+        display: table-row !important;
+    }
+    th.visible-lm,
+    td.visible-lm {
+        display: table-cell !important;
+    }
+}
 @media (max-width: 767px) {
   .hidden-xs,
   tr.hidden-xs,
