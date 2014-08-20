@@ -55,11 +55,11 @@ App::before(function ($request) {
     foreach ($addons as $addon) {
         if ($addon->installed == 1) {
             $addonsInstalled[] = $addon->addon_name;
-            if (file_exists(__DIR__ . "/../" . Config::get('cms.public_dir') . "/addons/{$addon->addon_name}/routes.php")) {
-                require __DIR__ . "/../" . Config::get('cms.public_dir') . "/addons/{$addon->addon_name}/routes.php";
+            if (file_exists(public_path() . "/addons/{$addon->addon_name}/routes.php")) {
+                require public_path() . "/addons/{$addon->addon_name}/routes.php";
             }
-            if (file_exists(__DIR__ . "/../" . Config::get('cms.public_dir') . "/addons/{$addon->addon_name}/func.php")) {
-                require __DIR__ . "/../" . Config::get('cms.public_dir') . "/addons/{$addon->addon_name}/func.php";
+            if (file_exists(public_path() . "/addons/{$addon->addon_name}/func.php")) {
+                require public_path() . "/addons/{$addon->addon_name}/func.php";
             }
 
             $namespace = $addon->addon_name;

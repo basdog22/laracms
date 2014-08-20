@@ -73,6 +73,7 @@ class Commoner{
         if(!is_null($seo)){
             return $seo->title;
         }
+        return Config::get('cms.title');
     }
 
     static function description(){
@@ -80,6 +81,7 @@ class Commoner{
         if(!is_null($seo)){
             return $seo->description;
         }
+        return Config::get('cms.description');
     }
 
     static function keywords(){
@@ -87,6 +89,7 @@ class Commoner{
         if(!is_null($seo)){
             return $seo->keywords;
         }
+        return Config::get('cms.keywords');
     }
 
     static function observe(){
