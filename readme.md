@@ -19,6 +19,13 @@ Then:
     * Edit app/config/cms.php and set installation hash and admin_email.
 
 
+###Method 1:
+    Install LaraCMS the artisan way:
+    * php artisan InstallLara
+
+###Method 2
+
+
 If for example the cms is installed on www.example.com
 Just run www.example.com/?hash=[YOUR_HASH_HERE]
 Assuming the db credentials are ok and you have the rights to create a db, the cms will create the db, will populate it and create a user based on your email
