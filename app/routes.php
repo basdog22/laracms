@@ -13,7 +13,7 @@
 
 Route::when('*', 'csrf', ['post', 'put', 'patch', 'delete']);
 
-Route::group(array('before' => 'auth','as'=>'backend'), function()
+Route::group(array('before' => 'auth|isadmin','as'=>'backend'), function()
 {
     Route::get('backend/','BackendController@dashboard');
 

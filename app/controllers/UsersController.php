@@ -78,6 +78,7 @@ class UsersController extends BaseController {
         $user->firstname = Input::get('firstname');
         $user->lastname = Input::get('lastname');
         $user->email = Input::get('email');
+        $user->is_admin = Input::get('is_admin');
         if(Input::get('password')){
             $user->password = Hash::make(Input::get('password'));
         }

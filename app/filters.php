@@ -120,6 +120,13 @@ Route::filter('auth', function () {
     }
 });
 
+Route::filter('isadmin', function () {
+    if(!Auth::user()->is_admin){
+        return Redirect::guest('users/login')->with(
+            'message', Lang::get('messages.only_admins_allowed')
+        );
+    }
+});
 
 Route::filter('auth.basic', function () {
     return Auth::basic();

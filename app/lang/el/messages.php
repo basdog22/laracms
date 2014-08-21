@@ -12,4 +12,5 @@ return array(
     'theme_installed'  =>  'Το θέμα εγκαταστάθηκε',
     'user_saved'        =>  'Ο χρήστης αποθηκεύτηκε',
     'lang_is_current'        =>  'Η γλώσσα τώρα είναι :name',
+    'only_admins_allowed'        =>  'Μόνο διαχειριστές έχουν πρόσβαση εδώ',
 );

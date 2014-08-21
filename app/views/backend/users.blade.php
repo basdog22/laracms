@@ -45,7 +45,7 @@
     <td>{{ $user->lastname }}</td>
     <td>{{ $user->firstname }}</td>
     <td>
-        @if ($user->id==1)
+        @if (Auth::user()->id<>1)
         <a href="{{url('users/profile/')}}" class="btn btn-primary modal-link">{{Lang::get('strings.profile')}}</a>
         @else
         <div class="btn-group">
